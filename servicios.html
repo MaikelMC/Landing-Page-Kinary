@@ -399,9 +399,11 @@
 
   /* ── Featured card variant ── */
   .pricing-card--featured {
-    border-color: rgba(212,175,55,0.25);
+    border-color: var(--accent);
+    border-width: 1.5px;
     background: linear-gradient(180deg, color-mix(in oklab, var(--surface), var(--accent) 3%), var(--surface));
     position: relative;
+    box-shadow: 0 0 20px rgba(212,175,55,0.08);
   }
   .pricing-card--featured::before {
     content: 'Popular';
@@ -633,7 +635,33 @@
 
       <div class="services-pricing stagger-children">
 
-        <!-- ── Card 1: Bots de Telegram ── -->
+        <!-- ── Card 1: Ciberseguridad ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="pricing-name">Ciberseguridad</div>
+          <div class="pricing-desc">Protección práctica contra phishing, robo de datos, accesos no autorizados y vulnerabilidades en tu web. Diagnóstico, capacitación y protección continua.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Básico · Diagnóstico<small>Revisión web, correos, WhatsApp, contraseñas • Informe de riesgos • Reunión 30 min explicativa</small></span>
+              <span class="pricing-tier-price">$75 <small></small></span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Estándar · Protección<span class="pricing-tier-badge" style="background:rgba(212,175,55,0.15);color:var(--accent)">Recomendado</span><small>Todo del Básico + 2h capacitación • 2FA • Contraseñas • Backups • SSL • Antivirus • 30 días soporte</small></span>
+              <span class="pricing-tier-price">$180<small></small></span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Premium · Web + Apps<small>Todo del Estándar + Auditoría web/app • Corrección vulnerabilidades • 60 días soporte • Monitoreo mensual</small></span>
+              <span class="pricing-tier-price">$300<small></small></span>
+            </div>
+          </div>
+          <div class="pricing-amount">Desde $75</div>
+          <div class="pricing-label">diagnóstico en 3-4 días</div>
+          <a href="contacto.html" class="pricing-btn">Solicitar →</a>
+        </div>
+
+        <!-- ── Card 2: Bots de Telegram ── -->
         <div class="pricing-card">
           <div class="pricing-icon">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2.5L2.5 10.5l7 2.8 2.8 7 2.8-7 3.5-3.5"/><path d="M12 10.5l-7 2.8"/></svg>
@@ -655,7 +683,7 @@
           <a href="contacto.html" class="pricing-btn">Solicitar →</a>
         </div>
 
-        <!-- ── Card 2: Automatizaciones ── -->
+        <!-- ── Card 3: Automatizaciones ── -->
         <div class="pricing-card">
           <div class="pricing-icon">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
@@ -681,7 +709,7 @@
           <a href="contacto.html" class="pricing-btn">Solicitar →</a>
         </div>
 
-        <!-- ── Card 3: Sitios Web ── -->
+        <!-- ── Card 4: Sitios Web ── -->
         <div class="pricing-card">
           <div class="pricing-icon">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
@@ -707,7 +735,7 @@
           <a href="contacto.html" class="pricing-btn">Solicitar →</a>
         </div>
 
-        <!-- ── Card 4: Capacitación en IA ── -->
+        <!-- ── Card 5: Capacitación en IA ── -->
         <div class="pricing-card pricing-card--alt">
           <div class="pricing-icon">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z"/></svg>
@@ -733,7 +761,7 @@
           <a href="contacto.html" class="pricing-btn">Solicitar →</a>
         </div>
 
-        <!-- ── Card 5: Chatbots IA ── -->
+        <!-- ── Card 6: Chatbots IA ── -->
         <div class="pricing-card pricing-card--featured">
           <div class="pricing-icon">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>

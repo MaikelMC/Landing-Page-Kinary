@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Noticias — Kynari | Ciberseguridad & Desarrollo Seguro</title>
+<meta name="description" content="Análisis, alertas y perspectivas del mundo de la ciberseguridad y el desarrollo seguro por Kynari.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --surface: #0a0a0a;
+    --surface-elevated: #111111;
+    --fg: #f0ece4;
+    --fg-2: #c8c0b0;
+    --muted: #8a8070;
+    --accent: #d4af37;
+    --accent-on: #000000;
+    --accent-glow: rgba(212,175,55,0.15);
+    --accent-glow-strong: rgba(212,175,55,0.25);
+    --border-subtle: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --glass-bg: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+    --glass-highlight: rgba(255,255,255,0.05);
+    --font-display: "Inter Tight", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-body: "Inter", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+    --text-xs: 11px;
+    --text-sm: 13px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-xl: 28px;
+    --text-2xl: 42px;
+    --text-3xl: 64px;
+    --leading-body: 1.5;
+    --leading-tight: 1.05;
+    --tracking-display: -0.02em;
+    --tracking-wide: 0.08em;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 980px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --container-max: 960px;
+    --container-gutter: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+  /* ─── Mesh Gradient Background ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(100,180,255,0.02) 0%, transparent 40%),
+      radial-gradient(ellipse 50% 60% at 50% 80%, rgba(212,175,55,0.03) 0%, transparent 50%);
+  }
+
+  /* ─── Noise Overlay ─── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: var(--accent); text-decoration: none; transition: color 0.4s var(--ease-out-expo); }
+  a:hover { color: var(--fg); }
+  p { text-wrap: pretty; }
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ─── Navigation (Floating Glass Pill) ─── */
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    pointer-events: none;
+  }
+  nav .container {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: 12px 24px;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 8px 32px rgba(0,0,0,0.4);
+    pointer-events: all;
+  }
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    white-space: nowrap;
+    transition: opacity 0.3s var(--ease-out-expo);
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-brand:hover { opacity: 0.7; }
+
+  .nav-cta {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    padding: 8px 20px;
+    background: var(--accent);
+    color: var(--accent-on);
+    border-radius: var(--radius-pill);
+    transition: all 0.4s var(--ease-out-expo);
+  }
+  .nav-cta:hover {
+    background: var(--fg);
+    color: var(--bg);
+    transform: scale(1.02);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    margin-left: auto;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--fg);
+    transition: all 0.4s var(--ease-out-expo);
+    transform-origin: center;
+  }
+  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-6px); }
+  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(280px, 75vw);
+    height: auto;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(40px) saturate(1.6);
+    -webkit-backdrop-filter: blur(40px) saturate(1.6);
+    flex-direction: column;
+    padding: 80px var(--space-5) var(--space-6);
+    gap: var(--space-1);
+    border-left: 1px solid var(--glass-border);
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.45s var(--ease-out-expo);
+    z-index: 101;
+  }
+  .nav-links.open { display: flex; transform: translateX(0); opacity: 1; pointer-events: all; }
+  .nav-links a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    padding: var(--space-3) var(--space-4);
+    color: var(--muted);
+    border-radius: var(--radius-sm);
+  }
+  .nav-links a:hover {
+    color: var(--fg);
+    background: rgba(255,255,255,0.04);
+  }
+  .nav-links a.active {
+    color: var(--accent);
+    background: rgba(212,175,55,0.06);
+  }
+  .nav-links a.nav-cta {
+    margin-top: var(--space-4);
+    padding: var(--space-3) var(--space-5);
+    background: var(--accent);
+    color: var(--accent-on);
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    text-align: center;
+  }
+  .nav-links a.nav-cta:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  /* ─── Desktop nav-links ─── */
+  @media (min-width: 921px) {
+    .nav-links {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-5);
+      height: auto;
+      padding: 0;
+      width: auto;
+      background: none;
+      backdrop-filter: none;
+      border: none;
+      transform: none;
+      opacity: 1;
+      pointer-events: all;
+      z-index: auto;
+      transition: none;
+    }
+    .nav-links a {
+      display: inline;
+      width: auto;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      color: var(--muted);
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 0;
+      border-radius: 0;
+      text-align: left;
+      position: relative;
+      opacity: 1;
+      transform: none;
+      transition: color 0.4s var(--ease-out-expo);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.4s var(--ease-out-expo);
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover::after { width: 100%; background: var(--accent); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a.nav-cta {
+      display: inline;
+      margin-top: 0;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      padding: 8px 20px;
+      background: var(--accent);
+      color: var(--accent-on);
+      border-radius: var(--radius-pill);
+      text-align: center;
+      width: auto;
+    }
+    .nav-links a.nav-cta:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+  }
+
+  @media (max-width: 920px) {
+    .nav-toggle { display: flex; }
+    nav {
+      top: 12px;
+      left: 16px;
+      right: 16px;
+      width: auto;
+      display: block;
+    }
+    nav .container {
+      display: block;
+    }
+    .nav-pill {
+      padding: 10px 16px;
+      justify-content: space-between;
+    }
+
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,5,5,0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 98;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease-out-expo);
+    }
+    .nav-backdrop.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav-links.open a {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .nav-links.open a:nth-child(1) { transition-delay: 0.06s; }
+    .nav-links.open a:nth-child(2) { transition-delay: 0.1s; }
+    .nav-links.open a:nth-child(3) { transition-delay: 0.14s; }
+    .nav-links.open a:nth-child(4) { transition-delay: 0.18s; }
+    .nav-links.open a:nth-child(5) { transition-delay: 0.22s; }
+    .nav-links.open a:nth-child(6) { transition-delay: 0.26s; }
+    .nav-links.open a.nav-cta { transition-delay: 0.3s; }
+    .nav-links a {
+      opacity: 0;
+      transform: translateX(24px);
+      transition: all 0.4s var(--ease-out-expo), background 0.3s;
+    }
+  }
+
+  /* ─── Blog Header ─── */
+  .blog-header {
+    padding: 160px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+  .blog-header::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(80px);
+    opacity: 0.6;
+  }
+  .blog-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: var(--space-6);
+    padding: 6px 16px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.1s forwards;
+  }
+  .blog-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .blog-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8vw, var(--text-3xl));
+    font-weight: 700;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+    color: var(--fg);
+    margin-bottom: var(--space-6);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
+  }
+  .blog-desc {
+    font-size: var(--text-lg);
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.35s forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* ─── Article Cards (Double-Bezel Glass) ─── */
+  .articles {
+    padding-bottom: var(--space-24);
+  }
+
+  .article-card {
+    position: relative;
+    margin-bottom: var(--space-8);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+  .article-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .article-card:nth-child(2) { transition-delay: 0.08s; }
+  .article-card:nth-child(3) { transition-delay: 0.16s; }
+  .article-card:nth-child(4) { transition-delay: 0.24s; }
+  .article-card:nth-child(5) { transition-delay: 0.32s; }
+
+  /* Outer Shell (Double-Bezel) */
+  .article-shell {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2px;
+    transition: all 0.5s var(--ease-out-expo);
+  }
+  .article-card:hover .article-shell {
+    border-color: var(--border-hover);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 20px 60px rgba(0,0,0,0.3),
+      0 0 40px var(--accent-glow);
+  }
+  .article-card.open .article-shell {
+    border-color: rgba(212,175,55,0.15);
+    box-shadow:
+      0 0 0 1px rgba(212,175,55,0.06) inset,
+      0 24px 80px rgba(0,0,0,0.4),
+      0 0 60px var(--accent-glow);
+  }
+
+  /* Inner Core */
+  .article-inner {
+    background: var(--surface);
+    border-radius: calc(var(--radius-lg) - 2px);
+    overflow: hidden;
+    position: relative;
+  }
+  .article-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .article-header {
+    padding: var(--space-8) var(--space-8) var(--space-6);
+    cursor: pointer;
+    position: relative;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .article-tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    background: rgba(212,175,55,0.08);
+    color: var(--accent);
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(212,175,55,0.12);
+  }
+  .article-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .article-title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    line-height: 1.2;
+    margin-bottom: var(--space-3);
+    transition: color 0.4s var(--ease-out-expo);
+  }
+  .article-card:hover .article-title { color: #fff; }
+  .article-excerpt {
+    font-size: var(--text-base);
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-5);
+    max-width: 600px;
+  }
+  .article-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--accent);
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(212,175,55,0.2);
+    transition: all 0.4s var(--ease-out-expo);
+  }
+  .article-toggle:hover {
+    background: rgba(212,175,55,0.08);
+    border-color: rgba(212,175,55,0.35);
+    gap: 14px;
+  }
+  .article-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(212,175,55,0.1);
+    font-size: 14px;
+    transition: transform 0.5s var(--ease-spring);
+  }
+  .article-card.open .article-toggle-icon { transform: rotate(45deg); }
+
+  /* Accordion Content */
+  .article-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s var(--ease-out-expo);
+  }
+  .article-card.open .article-content {
+    max-height: 2000px;
+  }
+  .article-content-inner {
+    padding: 0 var(--space-8) var(--space-8);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-6);
+  }
+  .article-content-inner p {
+    font-size: var(--text-base);
+    color: var(--fg-2);
+    line-height: 1.8;
+    margin-bottom: var(--space-5);
+  }
+  .article-content-inner h4 {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin-bottom: var(--space-3);
+    margin-top: var(--space-8);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .article-content-inner h4:first-child { margin-top: 0; }
+  .article-content-inner ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--space-5);
+  }
+  .article-content-inner li {
+    font-size: var(--text-base);
+    color: var(--fg-2);
+    line-height: 1.7;
+    padding-left: var(--space-6);
+    position: relative;
+    margin-bottom: var(--space-3);
+  }
+  .article-content-inner li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .article-content-inner strong { color: var(--fg); font-weight: 600; }
+  .article-content-inner a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(212,175,55,0.3);
+    transition: text-decoration-color 0.3s;
+  }
+  .article-content-inner a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-10) 0;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  footer p {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  footer span { color: var(--accent); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    .blog-header { padding: 120px 0 48px; }
+    .blog-title { font-size: clamp(32px, 10vw, 48px); }
+    .blog-desc { font-size: var(--text-base); }
+    .article-header { padding: var(--space-6) var(--space-5) var(--space-5); }
+    .article-content-inner { padding: 0 var(--space-5) var(--space-6); padding-top: var(--space-5); }
+    .article-title { font-size: 22px; }
+    .article-card { margin-bottom: var(--space-6); }
+  }
+  @media (max-width: 430px) {
+    .nav-pill { padding: 8px 14px; }
+    .blog-header { padding: 100px 0 32px; }
+    .article-header { padding: var(--space-5) var(--space-4) var(--space-4); }
+    .article-content-inner { padding: 0 var(--space-4) var(--space-5); padding-top: var(--space-4); }
+  }
+
+  /* ─── Reduced Motion ─── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .article-card { opacity: 1; transform: none; }
+    .article-card .article-content { transition: none; }
+    .article-card.open .article-content { max-height: none; }
+    .blog-label, .blog-title, .blog-desc { opacity: 1; transform: none; }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  a:focus-visible { outline-offset: 4px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-pill">
+      <a href="index.html" class="nav-brand">Kynari<span>.</span></a>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="sobre-mi.html">CEO</a>
+        <a href="noticias.html" class="active">Noticias</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contacto.html" class="nav-cta">Contacto</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-backdrop"></div>
+
+<main>
+  <div class="blog-header">
+    <div class="container">
+      <div class="blog-label">Blog</div>
+      <h1 class="blog-title">Noticias &amp; Perspectivas</h1>
+      <p class="blog-desc">Analisis, alertas de seguridad y buenas practicas del mundo de la ciberseguridad y el desarrollo seguro.</p>
+    </div>
+  </div>
+
+  <section class="articles">
+    <div class="container">
+      <div id="articles-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 <span>Kynari</span> - Ingenieria en Ciberseguridad. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  /* ─── Mobile nav toggle ─── */
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  const backdrop = document.querySelector('.nav-backdrop');
+
+  function openNav() {
+    links.classList.add('open');
+    toggle.classList.add('active');
+    toggle.setAttribute('aria-expanded', 'true');
+    backdrop.classList.add('visible');
+  }
+  function closeNav() {
+    links.classList.remove('open');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+    backdrop.classList.remove('visible');
+  }
+
+  toggle.addEventListener('click', () => {
+    links.classList.contains('open') ? closeNav() : openNav();
+  });
+  backdrop.addEventListener('click', closeNav);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('open')) closeNav();
+  });
+
+  /* ─── Scroll Reveal ─── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  /* ─── Blog Articles ─── */
+  (function() {
+    const articulos = [
+      {
+        id: 1,
+        tag: "Ciberseguridad",
+        titulo: "Vulnerabilidad CRITICAL en OpenSSL: lo que necesitas saber",
+        fecha: "15 Jun 2026",
+        excerpt: "Analisis del impacto de la CVE recien descubierta y pasos inmediatos para mitigar esta vulnerabilidad que afecta a miles de servidores en produccion.",
+        contenido: `
+          <p>El pasado 10 de junio se descubrió una vulnerabilidad de severidad critica (CVSS 9.8) en OpenSSL 3.x que permite a un atacante remoto ejecutar codigo arbitrario sin autenticacion previa. Esta CVE afecta directamente a la implementacion de TLS 1.3 y ha sido catalogada como una de las mas graves del año.</p>
+
+          <h4>Impacto</h4>
+          <p>Afecta a servidores que utilizan OpenSSL 3.0.0 - 3.1.1 para TLS 1.3 con certificados especificos. Esto incluye la mayoria de servidores web, APIs y servicios en la nube. Organizaciones como NIST y CISA ya emitieron alertas de emergencia.</p>
+          <ul>
+            <li>Servidores web con TLS 1.3 habilitado</li>
+            <li>APIs publicas y microservicios</li>
+            <li>VPNs y tuneles cifrados</li>
+            <li>Clientes de correo con STARTTLS</li>
+          </ul>
+
+          <h4>Mitigacion inmediata</h4>
+          <ul>
+            <li><strong>Actualizar OpenSSL</strong> a la version 3.1.2 o superior</li>
+            <li><strong>Revisar certificados</strong> SSL/TLS en uso y renovar si es necesario</li>
+            <li><strong>Monitorear logs</strong> en busca de actividad sospechosa</li>
+            <li><strong>Implementar WAF</strong> con reglas de emergencia para filtrar patrones de exploit</li>
+            <li><strong>Auditar dependencias</strong> para identificar servicios internos afectados</li>
+          </ul>
+
+          <h4>Lecciones aprendidas</h4>
+          <p>Este incidente refuerza la importancia de mantener un inventario actualizado de dependencias y tener un proceso de respuesta a vulnerabilidades documentado. Las organizaciones que tenian un SBOM (Software Bill of Materials) pudieron identificar el impacto en horas, no en dias.</p>
+          <p>Recomendacion: implementa un proceso de escaneo continuo de dependencias en tu pipeline CI/CD. Herramientas como Dependabot, Snyk o Grype pueden detectar estas vulnerabilidades antes de que lleguen a produccion.</p>
+        `
+      },
+      {
+        id: 2,
+        tag: "Desarrollo Seguro",
+        titulo: "DevSecOps en 2026: integrar seguridad sin frenar el deploy",
+        fecha: "28 May 2026",
+        excerpt: "Las mejores practicas para incorporar controles de seguridad en cada fase del pipeline CI/CD sin sacrificar velocidad ni developer experience.",
+        contenido: `
+          <p>El desarrollo de software seguro ya no es opcional. Con el aumento de brechas en cadena de suministro y los ataques a repositorios, integrar seguridad desde el primer commit es una necesidad empresarial. Pero la pregunta clave sigue siendo: como hacerlo sin convertir al equipo de seguridad en un cuello de botella?</p>
+
+          <h4>Puntos clave del pipeline seguro</h4>
+          <ul>
+            <li><strong>Commit:</strong> SAST + secret scanning automatizado. Detecta vulnerabilidades estaticas y credenciales expuestas antes de que lleguen al repositorio.</li>
+            <li><strong>Pull Request:</strong> Analisis de dependencias (SCA) y policy-as-code. Cada PR se valida contra reglas de seguridad predefinidas.</li>
+            <li><strong>Build:</strong> Escaneo de contenedores y generacion de SBOM. Imagenes Docker revisadas antes de llegar al registry.</li>
+            <li><strong>Deploy:</strong> Validacion de configuraciones y hardening automatizado. IaC escaneado con Checkov o tfsec.</li>
+            <li><strong>Runtime:</strong> DAST y monitoreo de anomalias. Validacion de que la aplicacion se comporta como se esperaba en produccion.</li>
+          </ul>
+
+          <h4>El error mas comun</h4>
+          <p>Intentar implementar todos los controles de golpe. El enfoque correcto es incremental: empieza con SAST y secret scanning, luego anade SCA, despues escaneo de contenedores, y finalmente DAST. Cada paso debe ser adoptado y madurado antes de anadir el siguiente.</p>
+
+          <h4>Metricas que importan</h4>
+          <ul>
+            <li><strong>MTTR</strong> (Mean Time to Remediate): cuanto tarda tu equipo en resolver una vulnerabilidad critica</li>
+            <li><strong>Fix rate:</strong> porcentaje de vulnerabilidades resueltas en menos de 30 dias</li>
+            <li><strong>False positive rate:</strong> si es demasiado alto, tu equipo dejara de confiar en las alertas</li>
+            <li><strong>Lead time for changes:</strong> el pipeline seguro no deberia aumentar significativamente este numero</li>
+          </ul>
+        `
+      },
+      {
+        id: 3,
+        tag: "Inteligencia Artificial",
+        titulo: "IA en ciberseguridad: aliada o amenaza?",
+        fecha: "10 May 2026",
+        excerpt: "Como la inteligencia artificial esta transformando tanto la defensa como el ataque, y como preparar a tu equipo para este nuevo escenario.",
+        contenido: `
+          <p>La inteligencia artificial esta redefiniendo el panorama de ciberseguridad. Por un lado, potencia la deteccion de amenazas y la respuesta automatizada. Por otro, los atacantes la usan para crear phishing mas convincente, deepfakes y automatizar ataques a escala. Estamos en una carrera armamentista donde ambos bandos tienen acceso a las mismas herramientas.</p>
+
+          <h4>Como usar la IA a tu favor</h4>
+          <ul>
+            <li><strong>Deteccion anomala:</strong> modelos de ML que aprenden el comportamiento normal de tu red y detectan desviaciones en tiempo real</li>
+            <li><strong>Analisis automatizado:</strong> procesamiento de logs y alertas con LLMs que priorizan y contextualizan incidentes</li>
+            <li><strong>Reportes de cumplimiento:</strong> generacion automatica de documentacion para ISO 27001, ENS y otras normativas</li>
+            <li><strong>Red team asistido:</strong> simulacion de ataques potenciada por IA para descubrir vulnerabilidades que los humanos pasan por alto</li>
+          </ul>
+
+          <h4>Riesgos a vigilar</h4>
+          <ul>
+            <li><strong>Prompt injection:</strong> ataques que manipulan las entradas de sistemas que procesan datos externos con IA</li>
+            <li><strong>Fuga de informacion:</strong> datos sensibles que se filtran a traves de herramientas de IA sin las salvaguardas adecuadas</li>
+            <li><strong>Dependencia excesiva:</strong> confiar ciegamente en las recomendaciones de un modelo sin validacion humana</li>
+            <li><strong>Sesgos en modelos:</strong> sistemas de deteccion que generan falsos positivos o negativos por sesgos en los datos de entrenamiento</li>
+          </ul>
+
+          <h4>Recomendacion practica</h4>
+          <p>La formacion es la mejor defensa. Un equipo que entiende tanto las capacidades como las limitaciones de la IA es tu activo mas valioso. Invierte en capacitacion y crea politicas claras sobre el uso de herramientas de IA en el contexto de seguridad.</p>
+        `
+      },
+      {
+        id: 4,
+        tag: "Automatizacion",
+        titulo: "Respuesta automatizada a incidentes: SOAR ligero para PyMEs",
+        fecha: "22 Abr 2026",
+        excerpt: "Implementacion practica de orquestacion de seguridad sin necesidad de plataformas enterprise costosas.",
+        contenido: `
+          <p>Las grandes empresas tienen equipos SOC 24/7 con plataformas SOAR de seis cifras. Pero las PyMEs tambien pueden automatizar su respuesta a incidentes con herramientas accesibles y codigo abierto. La clave no es el presupuesto, sino la estrategia.</p>
+
+          <h4>Stack recomendado para PyMEs</h4>
+          <ul>
+            <li><strong>Wazuh</strong> - SIEM open-source con deteccion de reglas, conformidad y respuesta a incidentes</li>
+            <li><strong>N8n / Node-RED</strong> - Orquestacion visual de flujos de trabajo sin codigo</li>
+            <li><strong>TheHive + Cortex</strong> - Gestion de incidentes y analisis automatizado de observables</li>
+            <li><strong>Slack/Teams webhook</strong> - Alertas en tiempo real al equipo de respuesta</li>
+          </ul>
+
+          <h4>Caso practico: bloqueo automatico de IPs</h4>
+          <p>Con este stack puedes construir un flujo como este: Wazuh detecta 10 intentos de brute force desde una IP, N8n recibe la alerta via webhook, ejecuta un script que anade la IP a la lista de bloqueo del firewall, envia notificacion al canal de Slack del equipo. Todo en menos de 30 segundos, sin intervencion humana.</p>
+
+          <h4>El objetivo real</h4>
+          <p>No es reemplazar al analista, sino que los casos repetitivos - IPs maliciosas, intentos de brute force, alertas de antivirus, escaneos de vulnerabilidades - se resuelvan automaticamente mientras el equipo se enfoca en lo que realmente requiere criterio humano: la investigacion forense, la comunicacion con stakeholders y la mejora continua de las defensas.</p>
+        `
+      },
+      {
+        id: 5,
+        tag: "Ciberseguridad",
+        titulo: "Zero Trust en 2026: mas alla del buzzword",
+        fecha: "05 Abr 2026",
+        excerpt: "El modelo Zero Trust ha pasado de concepto teorico a implementacion practica. Analizamos como aplicarlo en organizaciones reales.",
+        contenido: `
+          <p>"Nunca confies, siempre verifica" se ha convertido en el lema de la seguridad moderna. Pero Zero Trust no es un producto que compres, sino una arquitectura que construyes. En 2026, las organizaciones que lo implementan correctamente reportan una reduccion del 68% en el superficie de ataque.</p>
+
+          <h4>Los tres pilares fundamentales</h4>
+          <ul>
+            <li><strong>Identidad:</strong> autenticacion fuerte en cada acceso, sin excepciones. MFA obligatorio, tokens de corta duracion y revision periodica de privilegios.</li>
+            <li><strong>Dispositivo:</strong> solo dispositivos verificados y conformes pueden acceder a recursos. Health checks continuos del estado del endpoint.</li>
+            <li><strong>Red:</strong> microsegmentacion que aislada cada servicio. El trafico east-o-west se trata con la misma rigurosidad que el norte-sur.</li>
+          </ul>
+
+          <h4>Errores comunes en la implementacion</h4>
+          <ul>
+            <li>Implementar Zero Trust solo en el perimeter, ignorando la red interna</li>
+            <li>Depender unicamente de la tecnologia sin cambiar los procesos</li>
+            <li>No involucrar a los usuarios finales en la transicion</li>
+            <li>Intentar hacerlo todo a la vez en lugar de un enfoque por fases</li>
+          </ul>
+
+          <h4>Ruta de implementacion recomendada</h4>
+          <p>Empieza por la identidad: implementa SSO + MFA en todas las aplicaciones criticas. Luego mueve a la segmentacion de red para los sistemas mas sensibles. Finalmente, extiende la verificacion continua a todos los endpoints. Cada fase debe durar entre 3 y 6 meses.</p>
+        `
+      }
+    ];
+
+    const list = document.getElementById('articles-list');
+    if (!list) return;
+
+    articulos.forEach((a) => {
+      const card = document.createElement('article');
+      card.className = 'article-card';
+      card.id = 'noticia-' + a.id;
+
+      card.innerHTML = `
+        <div class="article-shell">
+          <div class="article-inner">
+            <div class="article-header">
+              <div class="article-meta">
+                <span class="article-tag">${a.tag}</span>
+                <span class="article-date">${a.fecha}</span>
+              </div>
+              <h2 class="article-title">${a.titulo}</h2>
+              <p class="article-excerpt">${a.excerpt}</p>
+              <button class="article-toggle" aria-expanded="false" aria-controls="content-${a.id}">
+                Leer mas <span class="article-toggle-icon">+</span>
+              </button>
+            </div>
+            <div class="article-content" id="content-${a.id}" role="region" aria-hidden="true">
+              <div class="article-content-inner">
+                ${a.contenido}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      list.appendChild(card);
+      revealObserver.observe(card);
+    });
+
+    /* Accordion */
+    list.addEventListener('click', (e) => {
+      const toggle = e.target.closest('.article-toggle');
+      const header = e.target.closest('.article-header');
+      if (!toggle && !header) return;
+
+      const card = (toggle || header).closest('.article-card');
+      const content = card.querySelector('.article-content');
+      const btn = card.querySelector('.article-toggle');
+      const isOpen = card.classList.contains('open');
+
+      list.querySelectorAll('.article-card.open').forEach(openCard => {
+        openCard.classList.remove('open');
+        openCard.querySelector('.article-content').setAttribute('aria-hidden', 'true');
+        openCard.querySelector('.article-toggle').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        card.classList.add('open');
+        content.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    /* Auto-expand from hash */
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target && target.classList.contains('article-card')) {
+        setTimeout(() => {
+          const navH = document.querySelector('nav')?.offsetHeight || 80;
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH - 40, behavior: 'smooth' });
+          const btn = target.querySelector('.article-toggle');
+          const content = target.querySelector('.article-content');
+          target.classList.add('open');
+          content.setAttribute('aria-hidden', 'false');
+          btn.setAttribute('aria-expanded', 'true');
+        }, 400);
+      }
+    }
+  })();
+</script>
+</body>
+</html>

@@ -168,6 +168,8 @@
   }
   .nav-links a:hover::after { width: 100%; }
   .nav-links a:hover { color: var(--fg); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a.active::after { width: 100%; }
   .nav-cta {
     font-family: var(--font-display);
     text-transform: uppercase;
@@ -693,6 +695,9 @@
     .hero-actions { align-items: center; }
     .hero-actions .btn { width: 100%; justify-content: center; }
     .nav-brand { font-size: 22px; }
+    .news-card { padding: var(--space-5); }
+    .news-title { font-size: var(--text-base); }
+    .news-meta { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
   }
 
   @media (max-width: 360px) {
@@ -726,6 +731,7 @@
     #hero::before,
     #servicios::before { animation: none !important; }
     .stat-number { animation: none; }
+    .news-card { opacity: 1; transform: none; }
   }
 
   :focus-visible {
@@ -738,6 +744,101 @@
   }
 
   a:focus-visible { outline-offset: 4px; }
+
+  /* ─── News / Blog ─── */
+  #noticias { background: var(--bg); position: relative; }
+  #noticias::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(212,175,55,0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .news-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+  @media (max-width: 920px) { .news-grid { grid-template-columns: 1fr; } }
+
+  .news-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: all var(--motion-base) var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .news-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform var(--motion-base) var(--ease-smooth);
+  }
+  .news-card:hover::before { transform: scaleX(1); }
+  .news-card:hover {
+    border-color: var(--border);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.04);
+  }
+  .news-card.open {
+    border-color: var(--border);
+    grid-column: 1 / -1;
+  }
+  .news-card.open::before { transform: scaleX(1); }
+
+  .news-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: var(--space-3);
+  }
+  .news-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    background: color-mix(in oklab, var(--accent), transparent 88%);
+    color: var(--accent);
+    border-radius: var(--radius-sm);
+  }
+  .news-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .news-title {
+    font-family: var(--font-display);
+    font-size: clamp(17px, 2.2vw, 20px);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--fg);
+    margin-bottom: var(--space-3);
+    line-height: var(--leading-tight);
+  }
+
+  .news-excerpt {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+
+  .news-link {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    transition: gap var(--motion-base) var(--ease-smooth);
+    font-weight: 500;
+  }
+  .news-link:hover { gap: var(--space-2); }
 </style>
 </head>
 <body>
@@ -756,6 +857,7 @@
   <a href="servicios.html">Servicios</a>
   <a href="proyectos.html">Proyectos</a>
   <a href="sobre-mi.html">CEO</a>
+  <a href="noticias.html">Noticias</a>
   <a href="faq.html">FAQ</a>
   <a href="contacto.html" class="nav-cta">Contacto</a>
 </div>
@@ -930,6 +1032,17 @@
           <div class="service-desc">Formación práctica en inteligencia artificial para personas y equipos. Aprenda a usar la IA a su favor en cualquier ámbito: productividad, análisis, creatividad y toma de decisiones.</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="noticias" data-od-id="noticias">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-label reveal">Noticias</div>
+        <h2 class="section-title reveal reveal-delay-1">Últimas novedades</h2>
+        <p class="section-desc reveal reveal-delay-2">Análisis, alertas y perspectivas del mundo de la ciberseguridad y el desarrollo seguro.</p>
+      </div>
+      <div id="news-grid" class="news-grid stagger-children"></div>
     </div>
   </section>
 
@@ -1130,6 +1243,72 @@
       });
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
+  })();
+
+  /* ─── News / Blog ─── */
+  (function() {
+    /* ── EDITA AQUÍ: Añade o elimina noticias del array ── */
+    const noticias = [
+      {
+        id: 1,
+        tag: "Ciberseguridad",
+        titulo: "Vulnerabilidad CRITICAL en OpenSSL: lo que necesitas saber",
+        fecha: "15 Jun 2026",
+        excerpt: "Análisis del impacto de la CVE recién descubierta y pasos inmediatos para mitigar esta vulnerabilidad que afecta a miles de servidores en producción."
+      },
+      {
+        id: 2,
+        tag: "Desarrollo Seguro",
+        titulo: "DevSecOps en 2026: integrar seguridad sin frenar el deploy",
+        fecha: "28 May 2026",
+        excerpt: "Las mejores prácticas para incorporar controles de seguridad en cada fase del pipeline CI/CD sin sacrificar velocidad ni developer experience."
+      },
+      {
+        id: 3,
+        tag: "Inteligencia Artificial",
+        titulo: "IA en ciberseguridad: aliada o amenaza?",
+        fecha: "10 May 2026",
+        excerpt: "Cómo la inteligencia artificial está transformando tanto la defensa como el ataque, y cómo preparar a tu equipo para este nuevo escenario."
+      },
+      {
+        id: 4,
+        tag: "Automatización",
+        titulo: "Respuesta automatizada a incidentes: SOAR ligero para PyMEs",
+        fecha: "22 Abr 2026",
+        excerpt: "Implementación práctica de orquestación de seguridad sin necesidad de plataformas enterprise costosas."
+      }
+    ];
+
+    const grid = document.getElementById('news-grid');
+    if (!grid) return;
+
+    noticias.forEach((n, i) => {
+      const card = document.createElement('article');
+      card.className = 'news-card reveal';
+      if (i > 0) card.classList.add('reveal-delay-' + Math.min(i, 4));
+
+      card.innerHTML = `
+        <div class="news-meta">
+          <span class="news-tag">${n.tag}</span>
+          <span class="news-date">${n.fecha}</span>
+        </div>
+        <h3 class="news-title">${n.titulo}</h3>
+        <p class="news-excerpt">${n.excerpt}</p>
+        <a href="noticias.html#noticia-${n.id}" class="news-link">Leer más <span>&rarr;</span></a>
+      `;
+      grid.appendChild(card);
+    });
+
+    const newsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          newsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    grid.querySelectorAll('.news-card').forEach(card => newsObserver.observe(card));
   })();
 
 

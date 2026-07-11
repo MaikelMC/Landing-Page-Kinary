@@ -206,7 +206,8 @@ body {
     right: 0;
     bottom: 0;
     width: min(280px, 75vw);
-    height: auto;
+    height: 100dvh;
+    min-height: 100dvh;
     background: rgba(10,10,10,0.95);
     backdrop-filter: blur(40px) saturate(1.6);
     -webkit-backdrop-filter: blur(40px) saturate(1.6);
@@ -727,7 +728,6 @@ body {
     <div class="nav-pill">
       <a href="index.html" class="nav-brand">Kynari<span>.</span></a>
       <div class="nav-links">
-        <a href="index.html">Inicio</a>
         <a href="servicios.html">Servicios</a>
         <a href="proyectos.html">Proyectos</a>
         <a href="sobre-mi.html">CEO</a>
@@ -807,145 +807,111 @@ body {
     const articulos = [
       {
         id: 1,
-        tag: "Ciberseguridad",
-        titulo: "Vulnerabilidad CRITICAL en OpenSSL: lo que necesitas saber",
-        fecha: "15 Jun 2026",
-        excerpt: "Analisis del impacto de la CVE recien descubierta y pasos inmediatos para mitigar esta vulnerabilidad que afecta a miles de servidores en produccion.",
+        tag: "Inteligencia Artificial",
+        titulo: "IA gratuita 2026: Muse Image, DeepSeek V4, MiniMax M2.1 y créditos Grok API",
+        fecha: "Jul 2026",
+        excerpt: "Meta lanza Muse Image, DeepSeek V4 y MiniMax M2.1 compiten con modelos cerrados, y Grok API ofrece créditos gratuitos para desarrolladores. Panorama completo de la IA accesible en 2026.",
         contenido: `
-          <p>El pasado 10 de junio se descubrió una vulnerabilidad de severidad critica (CVSS 9.8) en OpenSSL 3.x que permite a un atacante remoto ejecutar codigo arbitrario sin autenticacion previa. Esta CVE afecta directamente a la implementacion de TLS 1.3 y ha sido catalogada como una de las mas graves del año.</p>
+          <p>El ecosistema de inteligencia artificial gratuita y open source vive un momento sin precedentes en 2026. Nuevas herramientas y modelos estan democratizando el acceso a la IA, permitiendo que negocios de cualquier tamaño aprovechen estas tecnologias sin grandes inversiones iniciales.</p>
 
-          <h4>Impacto</h4>
-          <p>Afecta a servidores que utilizan OpenSSL 3.0.0 - 3.1.1 para TLS 1.3 con certificados especificos. Esto incluye la mayoria de servidores web, APIs y servicios en la nube. Organizaciones como NIST y CISA ya emitieron alertas de emergencia.</p>
-          <ul>
-            <li>Servidores web con TLS 1.3 habilitado</li>
-            <li>APIs publicas y microservicios</li>
-            <li>VPNs y tuneles cifrados</li>
-            <li>Clientes de correo con STARTTLS</li>
-          </ul>
+          <h4>Muse Image de Meta: generacion de imagenes IA gratuita</h4>
+          <p>Meta ha lanzado Muse Image, un generador de imagenes por inteligencia artificial gratuito que ya esta integrado en Meta AI, Instagram Stories y WhatsApp. La herramienta permite usar prompts complejos y fotos como referencia para crear contenido visual, lo que la hace ideal para negocios que buscan producir material grafico sin depender de disenadores o software costoso.</p>
+          <p>Muse Image representa un avance significativo en la generacion de imagenes accesible desde las plataformas de uso masivo, eliminando barreras de entrada para la creacion de contenido visual.</p>
 
-          <h4>Mitigacion inmediata</h4>
-          <ul>
-            <li><strong>Actualizar OpenSSL</strong> a la version 3.1.2 o superior</li>
-            <li><strong>Revisar certificados</strong> SSL/TLS en uso y renovar si es necesario</li>
-            <li><strong>Monitorear logs</strong> en busca de actividad sospechosa</li>
-            <li><strong>Implementar WAF</strong> con reglas de emergencia para filtrar patrones de exploit</li>
-            <li><strong>Auditar dependencias</strong> para identificar servicios internos afectados</li>
-          </ul>
+          <h4>DeepSeek V4 y MiniMax M2.1: modelos open source que compiten con los cerrados</h4>
+          <p>Las actualizaciones en modelos open source han marcado un hito en 2026. DeepSeek V4 y MiniMax M2.1 destacan como potentes alternativas gratuitas para programacion y tareas generales, compitiendo directamente con modelos cerrados de pago. Ambos modelos demuestran que la brecha entre soluciones open source y propietarias se reduce cada vez mas.</p>
 
-          <h4>Lecciones aprendidas</h4>
-          <p>Este incidente refuerza la importancia de mantener un inventario actualizado de dependencias y tener un proceso de respuesta a vulnerabilidades documentado. Las organizaciones que tenian un SBOM (Software Bill of Materials) pudieron identificar el impacto en horas, no en dias.</p>
-          <p>Recomendacion: implementa un proceso de escaneo continuo de dependencias en tu pipeline CI/CD. Herramientas como Dependabot, Snyk o Grype pueden detectar estas vulnerabilidades antes de que lleguen a produccion.</p>
+          <h4>Grok API: creditos gratuitos para desarrolladores</h4>
+          <p>xAI ha lanzado un programa de creditos para su API Grok que beneficia especialmente a desarrolladores y pequenos negocios. Los nuevos usuarios reciben $25 en creditos de promocion al registrarse, y pueden optar por hasta $150/mes adicionales compartiendo datos de uso, una vez que hayan gastado $5. Este modelo hace que Grok API sea especialmente util para bots y automatizaciones con IA a bajo costo.</p>
+
+          <h4>Otras herramientas open source recomendadas</h4>
+          <p>Plataformas como SiliconFlow, Hugging Face, Falcon AI, Stable LM y OpenChat continuan siendo referentes en 2026, ofreciendo capacidades potentes sin costo. El ecosistema open source de IA se consolida como una alternativa viable y competitiva frente a las soluciones cerradas.</p>
         `
       },
       {
         id: 2,
-        tag: "Desarrollo Seguro",
-        titulo: "DevSecOps en 2026: integrar seguridad sin frenar el deploy",
-        fecha: "28 May 2026",
-        excerpt: "Las mejores practicas para incorporar controles de seguridad en cada fase del pipeline CI/CD sin sacrificar velocidad ni developer experience.",
+        tag: "Ciberseguridad",
+        titulo: "Aumento del 89% en ataques impulsados por IA: el panorama 2026",
+        fecha: "2026",
+        excerpt: "Los informes de CrowdStrike y ESET revelan un incremento del 89% en ataques con IA, con propagación en 29 minutos y foco en supply chain y cloud.",
         contenido: `
-          <p>El desarrollo de software seguro ya no es opcional. Con el aumento de brechas en cadena de suministro y los ataques a repositorios, integrar seguridad desde el primer commit es una necesidad empresarial. Pero la pregunta clave sigue siendo: como hacerlo sin convertir al equipo de seguridad en un cuello de botella?</p>
+          <p>El panorama de la ciberseguridad en 2026 esta marcado por una escalada sin precedentes en ataques impulsados por inteligencia artificial. Segun los informes de CrowdStrike, ESET y otras firmas lideres, los ataques mediados por IA han aumentado un 89% respecto al ano anterior, con tiempos de propagacion que se reducen a apenas 29 minutos.</p>
 
-          <h4>Puntos clave del pipeline seguro</h4>
+          <h4>Foco en supply chain y cloud</h4>
+          <p>Los atacantes han concentrado sus esfuerzos en la cadena de suministro (supply chain) y en infraestructura cloud, dos vectores que ofrecen el maximo impacto con el minimo esfuerzo. La capacidad de la IA para automatizar el reconocimiento de vulnerabilidades y la ejecucion de exploits ha acelerado dramaticamente estos ataques.</p>
+
+          <h4>Tendencias que marcan 2026</h4>
+          <p>Los informes senalan un enfasis creciente en deepfakes como herramienta de ingenieria social, ransomware potenciado por IA que se adapta a las defensas en tiempo real, y una gobernanza de IA que las empresas comienzan a implementar para protegerse. La recomendacion de los expertos es clara: diagnosticos de seguridad regulares y capacitacion continua del personal son la primera linea de defensa.</p>
           <ul>
-            <li><strong>Commit:</strong> SAST + secret scanning automatizado. Detecta vulnerabilidades estaticas y credenciales expuestas antes de que lleguen al repositorio.</li>
-            <li><strong>Pull Request:</strong> Analisis de dependencias (SCA) y policy-as-code. Cada PR se valida contra reglas de seguridad predefinidas.</li>
-            <li><strong>Build:</strong> Escaneo de contenedores y generacion de SBOM. Imagenes Docker revisadas antes de llegar al registry.</li>
-            <li><strong>Deploy:</strong> Validacion de configuraciones y hardening automatizado. IaC escaneado con Checkov o tfsec.</li>
-            <li><strong>Runtime:</strong> DAST y monitoreo de anomalias. Validacion de que la aplicacion se comporta como se esperaba en produccion.</li>
+            <li><strong>89% mas ataques</strong> impulsados por IA respecto al periodo anterior</li>
+            <li><strong>Propagacion en 29 minutos</strong> desde la intrusion inicial</li>
+            <li><strong>Supply chain y cloud</strong> como vectores principales</li>
+            <li><strong>Deepfakes y ransomware</strong> como amenazas crecientes</li>
+            <li><strong>Gobernanza de IA</strong> como prioridad empresarial</li>
           </ul>
-
-          <h4>El error mas comun</h4>
-          <p>Intentar implementar todos los controles de golpe. El enfoque correcto es incremental: empieza con SAST y secret scanning, luego anade SCA, despues escaneo de contenedores, y finalmente DAST. Cada paso debe ser adoptado y madurado antes de anadir el siguiente.</p>
-
-          <h4>Metricas que importan</h4>
-          <ul>
-            <li><strong>MTTR</strong> (Mean Time to Remediate): cuanto tarda tu equipo en resolver una vulnerabilidad critica</li>
-            <li><strong>Fix rate:</strong> porcentaje de vulnerabilidades resueltas en menos de 30 dias</li>
-            <li><strong>False positive rate:</strong> si es demasiado alto, tu equipo dejara de confiar en las alertas</li>
-            <li><strong>Lead time for changes:</strong> el pipeline seguro no deberia aumentar significativamente este numero</li>
-          </ul>
+          <p>Fuentes: CrowdStrike Global Threat Report 2026, informes Laguun y WEF Global Cybersecurity Outlook 2026.</p>
         `
       },
       {
         id: 3,
-        tag: "Inteligencia Artificial",
-        titulo: "IA en ciberseguridad: aliada o amenaza?",
-        fecha: "10 May 2026",
-        excerpt: "Como la inteligencia artificial esta transformando tanto la defensa como el ataque, y como preparar a tu equipo para este nuevo escenario.",
+        tag: "Open Source",
+        titulo: "Herramientas open source de ciberseguridad y productividad para 2026",
+        fecha: "2026",
+        excerpt: "Allama automatiza seguridad con IA, Pompelmi escanea uploads en Node.js, OpenSSF se actualiza. SiliconFlow, Hugging Face, Falcon AI, Stable LM y OpenChat completan el ecosistema.",
         contenido: `
-          <p>La inteligencia artificial esta redefiniendo el panorama de ciberseguridad. Por un lado, potencia la deteccion de amenazas y la respuesta automatizada. Por otro, los atacantes la usan para crear phishing mas convincente, deepfakes y automatizar ataques a escala. Estamos en una carrera armamentista donde ambos bandos tienen acceso a las mismas herramientas.</p>
+          <p>El software open source continua siendo un pilar fundamental tanto para la ciberseguridad como para la productividad empresarial. En 2026, varias herramientas destacan por su capacidad para ofrecer soluciones profesionales sin coste de licencia.</p>
 
-          <h4>Como usar la IA a tu favor</h4>
-          <ul>
-            <li><strong>Deteccion anomala:</strong> modelos de ML que aprenden el comportamiento normal de tu red y detectan desviaciones en tiempo real</li>
-            <li><strong>Analisis automatizado:</strong> procesamiento de logs y alertas con LLMs que priorizan y contextualizan incidentes</li>
-            <li><strong>Reportes de cumplimiento:</strong> generacion automatica de documentacion para ISO 27001, ENS y otras normativas</li>
-            <li><strong>Red team asistido:</strong> simulacion de ataques potenciada por IA para descubrir vulnerabilidades que los humanos pasan por alto</li>
-          </ul>
+          <h4>Allama: automatizacion de seguridad con IA</h4>
+          <p>Allama se posiciona como una herramienta clave para la automatizacion de tareas de seguridad mediante inteligencia artificial. Permite a equipos de seguridad delegar procesos repetitivos en agentes automatizados, liberando tiempo para el analisis profundo y la toma de decisiones estrategicas.</p>
 
-          <h4>Riesgos a vigilar</h4>
-          <ul>
-            <li><strong>Prompt injection:</strong> ataques que manipulan las entradas de sistemas que procesan datos externos con IA</li>
-            <li><strong>Fuga de informacion:</strong> datos sensibles que se filtran a traves de herramientas de IA sin las salvaguardas adecuadas</li>
-            <li><strong>Dependencia excesiva:</strong> confiar ciegamente en las recomendaciones de un modelo sin validacion humana</li>
-            <li><strong>Sesgos en modelos:</strong> sistemas de deteccion que generan falsos positivos o negativos por sesgos en los datos de entrenamiento</li>
-          </ul>
+          <h4>Pempelmi: escaneo de uploads en Node.js</h4>
+          <p>Pempelmi es una herramienta open source especializada en el escaneo de archivos subidos (uploads) en aplicaciones Node.js. Su capacidad para detectar malware y contenido malicioso en tiempo real la convierte en un componente esencial para cualquier aplicacion que maneje subidas de usuarios.</p>
 
-          <h4>Recomendacion practica</h4>
-          <p>La formacion es la mejor defensa. Un equipo que entiende tanto las capacidades como las limitaciones de la IA es tu activo mas valioso. Invierte en capacitacion y crea politicas claras sobre el uso de herramientas de IA en el contexto de seguridad.</p>
+          <h4>OpenSSF y las actualizaciones de seguridad</h4>
+          <p>La Open Source Security Foundation (OpenSSF) ha recibido actualizaciones significativas que refuerzan la seguridad del ecosistema open source en general, mejorando la respuesta a vulnerabilidades y la coordinacion entre proyectos.</p>
+
+          <h4>Ecosistema open source recomendado</h4>
+          <p>Plataformas como SiliconFlow, Hugging Face, Falcon AI, Stable LM y OpenChat continuan siendo recomendadas en 2026 como herramientas gratuitas y potentes para desarrollo, inteligencia artificial y automatizacion.</p>
         `
       },
       {
         id: 4,
-        tag: "Automatizacion",
-        titulo: "Respuesta automatizada a incidentes: SOAR ligero para PyMEs",
-        fecha: "22 Abr 2026",
-        excerpt: "Implementacion practica de orquestacion de seguridad sin necesidad de plataformas enterprise costosas.",
+        tag: "Automatización",
+        titulo: "n8n 2026: nuevos nodos AI Agent, soporte multi-modelo y Canvas UI",
+        fecha: "Jul 2026",
+        excerpt: "n8n incorpora nodos AI Agent con soporte para Claude, Grok y Gemini, nuevo Canvas UI, mas nodos (Anthropic, Groq) y mejor manejo de errores y seguridad.",
         contenido: `
-          <p>Las grandes empresas tienen equipos SOC 24/7 con plataformas SOAR de seis cifras. Pero las PyMEs tambien pueden automatizar su respuesta a incidentes con herramientas accesibles y codigo abierto. La clave no es el presupuesto, sino la estrategia.</p>
+          <p>n8n, la plataforma de automatizacion de flujos de trabajo open source, ha recibido actualizaciones significativas en 2026 que la consolidan como una de las herramientas mas potentes para la automatizacion empresarial con inteligencia artificial integrada.</p>
 
-          <h4>Stack recomendado para PyMEs</h4>
-          <ul>
-            <li><strong>Wazuh</strong> - SIEM open-source con deteccion de reglas, conformidad y respuesta a incidentes</li>
-            <li><strong>N8n / Node-RED</strong> - Orquestacion visual de flujos de trabajo sin codigo</li>
-            <li><strong>TheHive + Cortex</strong> - Gestion de incidentes y analisis automatizado de observables</li>
-            <li><strong>Slack/Teams webhook</strong> - Alertas en tiempo real al equipo de respuesta</li>
-          </ul>
+          <h4>Nuevos nodos AI Agent mejorados</h4>
+          <p>La actualizacion mas destacada son los nuevos nodos AI Agent, que ahora ofrecen soporte multi-modelo. Los agentes pueden trabajar con Claude (Anthropic), Grok (xAI) y Gemini (Google), permitiendo elegir el modelo mas adecuado para cada tarea especifica sin cambiar de plataforma.</p>
 
-          <h4>Caso practico: bloqueo automatico de IPs</h4>
-          <p>Con este stack puedes construir un flujo como este: Wazuh detecta 10 intentos de brute force desde una IP, N8n recibe la alerta via webhook, ejecuta un script que anade la IP a la lista de bloqueo del firewall, envia notificacion al canal de Slack del equipo. Todo en menos de 30 segundos, sin intervencion humana.</p>
+          <h4>Canvas UI y nuevos nodos</h4>
+          <p>n8n ha renovado su interfaz con un nuevo Canvas UI que facilita la creacion visual de flujos de trabajo complejos. Ademas, se han anadido nuevos nodos especificos para Anthropic, Groq y otros proveedores, ampliando las capacidades de integracion de la plataforma.</p>
 
-          <h4>El objetivo real</h4>
-          <p>No es reemplazar al analista, sino que los casos repetitivos - IPs maliciosas, intentos de brute force, alertas de antivirus, escaneos de vulnerabilidades - se resuelvan automaticamente mientras el equipo se enfoca en lo que realmente requiere criterio humano: la investigacion forense, la comunicacion con stakeholders y la mejora continua de las defensas.</p>
+          <h4>Seguridad y manejo de errores</h4>
+          <p>Las versiones recientes (2.29-2.30, julio 2026) incluyen mejoras sustanciales en el manejo de errores y en la seguridad de los flujos. Estas actualizaciones permiten construir automatizaciones mas robustas y confiables, reduciendo el tiempo de resolucion de incidencias.</p>
+          <p>Para mas detalle: docs.n8n.io/changelog y GitHub releases.</p>
         `
       },
       {
         id: 5,
-        tag: "Ciberseguridad",
-        titulo: "Zero Trust en 2026: mas alla del buzzword",
-        fecha: "05 Abr 2026",
-        excerpt: "El modelo Zero Trust ha pasado de concepto teorico a implementacion practica. Analizamos como aplicarlo en organizaciones reales.",
+        tag: "Automatización",
+        titulo: "Telegram AI Bots Revolution: 11 nuevas funciones para bots",
+        fecha: "Jun 2026",
+        excerpt: "Telegram lanza Guest Bots, comunicación bot-to-bot, automatizaciones de chat y rich text. Actualizaciones importantes de junio 2026.",
         contenido: `
-          <p>"Nunca confies, siempre verifica" se ha convertido en el lema de la seguridad moderna. Pero Zero Trust no es un producto que compres, sino una arquitectura que construyes. En 2026, las organizaciones que lo implementan correctamente reportan una reduccion del 68% en el superficie de ataque.</p>
+          <p>Telegram ha anunciado una de las actualizaciones mas importantes para su plataforma de bots desde su creacion. Las 11 nuevas funciones, anunciadas en junio de 2026, transforman radicalmente las capacidades de los bots en la plataforma.</p>
 
-          <h4>Los tres pilares fundamentales</h4>
-          <ul>
-            <li><strong>Identidad:</strong> autenticacion fuerte en cada acceso, sin excepciones. MFA obligatorio, tokens de corta duracion y revision periodica de privilegios.</li>
-            <li><strong>Dispositivo:</strong> solo dispositivos verificados y conformes pueden acceder a recursos. Health checks continuos del estado del endpoint.</li>
-            <li><strong>Red:</strong> microsegmentacion que aislada cada servicio. El trafico east-o-west se trata con la misma rigurosidad que el norte-sur.</li>
-          </ul>
+          <h4>Guest Bots: mencionables en cualquier chat</h4>
+          <p>Una de las novedades mas esperadas son los Guest Bots, que ahora pueden ser mencionados directamente en cualquier chat sin necesidad de anadirlos como miembros del grupo. Esto permite a los usuarios invocar funcionalidades de bots de forma mucho mas natural y flexible.</p>
 
-          <h4>Errores comunes en la implementacion</h4>
-          <ul>
-            <li>Implementar Zero Trust solo en el perimeter, ignorando la red interna</li>
-            <li>Depender unicamente de la tecnologia sin cambiar los procesos</li>
-            <li>No involucrar a los usuarios finales en la transicion</li>
-            <li>Intentar hacerlo todo a la vez en lugar de un enfoque por fases</li>
-          </ul>
+          <h4>Comunicacion bot-to-bot</h4>
+          <p>La nueva capacidad de comunicacion bot-to-bot permite que diferentes bots colaboren entre si, abriendo posibilidades de automatizacion avanzada. Un bot puede delegar tareas a otro bot especializado, creando ecosistemas de automatizacion complejos sin intervencion humana.</p>
 
-          <h4>Ruta de implementacion recomendada</h4>
-          <p>Empieza por la identidad: implementa SSO + MFA en todas las aplicaciones criticas. Luego mueve a la segmentacion de red para los sistemas mas sensibles. Finalmente, extiende la verificacion continua a todos los endpoints. Cada fase debe durar entre 3 y 6 meses.</p>
+          <h4>Automatizaciones de chat y rich text</h4>
+          <p>Las automatizaciones de chat permiten programar respuestas automaticas, moderacion inteligente y flujos conversacionales avanzados. El soporte para rich text mejora la presentacion de contenido, permitiendo mensajes con formato enriquecido, botones interactivos y mucho mas.</p>
+          <p>Fuente: telegram.org/blog/ai-bot-revolution-11-new-features.</p>
         `
       }
     ];

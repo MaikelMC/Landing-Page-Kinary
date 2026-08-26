@@ -1192,6 +1192,7 @@
     links.classList.contains('open') ? closeNav() : openNav();
   });
   backdrop.addEventListener('click', closeNav);
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && links.classList.contains('open')) closeNav();
   });
@@ -1231,6 +1232,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const el = entry.target;
+          counterObserver.unobserve(el);
           const text = el.textContent;
           const digits = text.replace(/[^0-9]/g, '');
           const num = parseInt(digits);
@@ -1248,7 +1250,6 @@
             }
             el.textContent = prefix + current + suffix;
           }, 30);
-          counterObserver.unobserve(el);
         }
       });
     }, { threshold: 0.5 });

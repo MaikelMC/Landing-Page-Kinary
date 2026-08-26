@@ -798,6 +798,7 @@ body {
     links.classList.contains('open') ? closeNav() : openNav();
   });
   backdrop.addEventListener('click', closeNav);
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && links.classList.contains('open')) closeNav();
   });
@@ -986,18 +987,20 @@ body {
 
     /* Auto-expand from hash */
     if (location.hash) {
-      const target = document.querySelector(location.hash);
-      if (target && target.classList.contains('article-card')) {
-        setTimeout(() => {
-          const navH = document.querySelector('nav')?.offsetHeight || 80;
-          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH - 40, behavior: 'smooth' });
-          const btn = target.querySelector('.article-toggle');
-          const content = target.querySelector('.article-content');
-          target.classList.add('open');
-          content.setAttribute('aria-hidden', 'false');
-          btn.setAttribute('aria-expanded', 'true');
-        }, 400);
-      }
+      try {
+        const target = document.querySelector(location.hash);
+        if (target && target.classList.contains('article-card')) {
+          setTimeout(() => {
+            const navH = document.querySelector('nav')?.offsetHeight || 80;
+            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH - 40, behavior: 'smooth' });
+            const btn = target.querySelector('.article-toggle');
+            const content = target.querySelector('.article-content');
+            target.classList.add('open');
+            content.setAttribute('aria-hidden', 'false');
+            btn.setAttribute('aria-expanded', 'true');
+          }, 400);
+        }
+      } catch (_) { /* hash no válido como selector */ }
     }
   })();
 </script>

@@ -752,6 +752,7 @@
         <form class="contact-form reveal reveal-delay-1" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
           <input type="hidden" name="access_key" value="37e649df-7294-49eb-b5e1-117c91cf95e5">
           <input type="hidden" name="subject" value="Nueva solicitud - Kynari">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-group">
             <label for="formName">Nombre</label>
             <input type="text" id="formName" name="name" placeholder="Tu nombre completo" required>
@@ -814,6 +815,7 @@
     links.classList.contains('open') ? closeNav() : openNav();
   });
   backdrop.addEventListener('click', closeNav);
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && links.classList.contains('open')) closeNav();
   });
@@ -843,7 +845,7 @@
       document.getElementById('formService').focus();
       return;
     }
-    if (!phone || phone.length < 6) {
+    if (!phone || !/^[+]?[\d\s()-]{6,20}$/.test(phone)) {
       showStatus('Ingresa un teléfono de contacto válido.', 'error');
       document.getElementById('formPhone').focus();
       return;
@@ -854,16 +856,21 @@
     btn.disabled = true;
     btn.textContent = 'Enviando...';
 
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
     try {
       const formData = new FormData(form);
       formData.set('from_name', name);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData
+        body: formData,
+        signal: controller.signal
       });
 
-      const data = await response.json();
+      clearTimeout(timer);
+      let data = {};
+      try { data = await response.json(); } catch (_) { /* respuesta no JSON */ }
 
       if (data.success) {
         showStatus('¡Solicitud enviada con éxito! Te responderemos en menos de 24 horas hábiles. ✓', 'success');
@@ -872,11 +879,14 @@
         showStatus('Hubo un error al enviar la solicitud. Intenta de nuevo o escríbenos directamente por email.', 'error');
       }
     } catch (err) {
-      showStatus('Error de conexión. Verifica tu internet o escríbenos a kynaridevai@gmail.com', 'error');
+      showStatus(err.name === 'AbortError'
+        ? 'El envío tardó demasiado. Inténtalo de nuevo.'
+        : 'Error de conexión. Verifica tu internet o escríbenos a kynaridevai@gmail.com', 'error');
+    } finally {
+      clearTimeout(timer);
+      btn.disabled = false;
+      btn.textContent = 'Enviar solicitud';
     }
-
-    btn.disabled = false;
-    btn.textContent = 'Enviar solicitud';
   });
 
   let statusTimeout;

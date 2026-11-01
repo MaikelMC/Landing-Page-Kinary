@@ -13,6 +13,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://kynari.dev/kynari-logo.png">
 <link rel="canonical" href="https://kynari.dev/contacto.html">
+<link rel="alternate" hreflang="es" href="https://kynari.dev/contacto.html">
+<link rel="alternate" hreflang="en" href="https://kynari.dev/en/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://kynari.dev/contacto.html">
 <meta property="og:url" content="https://kynari.dev/contacto.html">
 
 <link rel="icon" type="image/png" href="kynari-logo.png">
@@ -683,6 +686,23 @@
   }
   footer p { font-size: var(--text-sm); color: var(--muted); }
   footer span { color: var(--accent); }
+
+  /* ─── Cambio de idioma ─── */
+  .nav-links a.nav-lang {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    padding: 6px 10px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    color: var(--fg-2);
+  }
+  .nav-links a.nav-lang::after { display: none; }
+  .nav-links a.nav-lang:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 920px) {
+    .nav-links a.nav-lang { display: block; padding: 10px; margin-top: var(--space-1); text-align: center; font-size: 13px; }
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -702,11 +722,19 @@
       "addressCountry": "CU"
     },
     "areaServed": "CU",
-    "founder": {
-      "@type": "Person",
-      "name": "Maikel de Arma",
-      "jobTitle": "Ingeniero en Ciberseguridad"
-    },
+    "founder": [
+      {
+        "@type": "Person",
+        "name": "Maikel de Arma",
+        "jobTitle": "Ingeniero en Ciberseguridad"
+      },
+      {
+        "@type": "Person",
+        "name": "Mauricio Benitez",
+        "jobTitle": "Cofundador",
+        "url": "https://kynari.dev/sobre-mi.html#mauricio-benitez"
+      }
+    ],
     "sameAs": [
       "https://github.com/MaikelMC",
       "https://www.linkedin.com/in/maikeldearma"
@@ -723,11 +751,13 @@
       <a href="index.html" class="nav-brand">Kynari<span>.</span></a>
       <div class="nav-links">
         <a href="servicios.html">Servicios</a>
+        <a href="apps.html">Apps</a>
         <a href="proyectos.html">Proyectos</a>
-        <a href="sobre-mi.html">CEO</a>
+        <a href="sobre-mi.html">Equipo</a>
         <a href="noticias.html">Noticias</a>
         <a href="faq.html">FAQ</a>
         <a href="contacto.html" class="nav-cta active">Contacto</a>
+        <a href="en/contact.html" class="nav-lang" lang="en" hreflang="en" aria-label="English version">EN</a>
       </div>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -769,6 +799,10 @@
               <option value="Creación de Sitios Web">Creación de Sitios Web</option>
               <option value="Capacitación en IA">Capacitación en IA</option>
               <option value="Chatbots IA">Chatbots IA</option>
+              <option value="Apps a medida">Apps a medida</option>
+              <option value="Sistemas para negocios">Sistemas para negocios</option>
+              <option value="Primera versión de tu idea">Primera versión de tu idea</option>
+              <option value="Mantenimiento mensual">Mantenimiento mensual</option>
               <option value="Otro">Otro</option>
             </select>
           </div>

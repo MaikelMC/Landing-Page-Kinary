@@ -694,6 +694,23 @@
   }
   footer p { font-size: var(--text-sm); color: var(--muted); }
   footer span { color: var(--accent); }
+
+  /* ─── Cambio de idioma ─── */
+  .nav-links a.nav-lang {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    padding: 6px 10px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    color: var(--fg-2);
+  }
+  .nav-links a.nav-lang::after { display: none; }
+  .nav-links a.nav-lang:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 920px) {
+    .nav-links a.nav-lang { display: block; padding: 10px; margin-top: var(--space-1); text-align: center; font-size: 13px; }
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -757,11 +774,13 @@
       <a href="index.html" class="nav-brand">Kynari<span>.</span></a>
       <div class="nav-links" id="navLinks">
         <a href="servicios.html">Servicios</a>
+        <a href="apps.html">Apps</a>
         <a href="proyectos.html" class="active">Proyectos</a>
-        <a href="sobre-mi.html">CEO</a>
+        <a href="sobre-mi.html">Equipo</a>
         <a href="noticias.html">Noticias</a>
         <a href="faq.html">FAQ</a>
         <a href="contacto.html" class="nav-cta">Contacto</a>
+        <a href="en/index.html" class="nav-lang" lang="en" hreflang="en" aria-label="English version">EN</a>
       </div>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>

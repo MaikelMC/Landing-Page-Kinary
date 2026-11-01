@@ -1,8 +1,9 @@
 // Change this version with every release: it is what makes installed apps update.
-const CACHE = 'mbm-invoice-v0.8.1';
+const CACHE = 'mbm-invoice-v0.9.1';
 const FILES = [
   './',
   'index.html',
+  'privacidad.html',
   'app.js',
   'styles.css',
   'manifest.webmanifest',

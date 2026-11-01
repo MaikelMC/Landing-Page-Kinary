@@ -1,21 +1,31 @@
 (() => {
   'use strict';
 
-  // In a browser nothing may leave the device: block any connection to other sites.
+  // Only the account server can be reached: invoices stay on the device.
+  const API_URL = location.hostname === 'localhost' ? 'http://localhost:8792' : 'https://facturas-api.kynariempleos.com';
+  const GOOGLE_CLIENT_ID = '22468952436-omh6bj9nm6q979j9suja18ta374jprp5.apps.googleusercontent.com';
+
+  // In a browser nothing else may leave the device: block any connection to other sites.
   // The Android app loads from file://, where this policy would block its own files.
   if (location.protocol.startsWith('http')) {
     const csp = document.createElement('meta');
     csp.httpEquiv = 'Content-Security-Policy';
-    csp.content = "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'";
+    csp.content = `default-src 'self'; connect-src 'self' ${API_URL}; frame-src https://*.a-ads.com; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'`;
     document.head.appendChild(csp);
   }
 
-  const APP_VERSION = '0.8.1';
+  const APP_VERSION = '0.9.1';
   const STORAGE_KEY = 'mbm_invoice_v1_state';
+  // Kept apart from the invoices so backups never carry the session.
+  const SESSION_KEY = 'mbm_invoice_session';
+  const NONCE_KEY = 'mbm_invoice_login_nonce';
   // The Android build fills this in so its older versions keep their saved data.
   const LEGACY_STORAGE_KEY = null;
   const CURRENCIES = ['USD', 'CAD', 'EUR', 'MXN', 'CUP', 'COP', 'ARS', 'CLP', 'PEN', 'DOP', 'GBP'];
   const BACKUP_REMINDER_DAYS = 30;
+  // Off while null. To turn on a direct ad: { image: 'anuncios/nombre.png', link: 'https://…', text: 'Nombre del anunciante' }.
+  // The image must be one of the app's own files, so nothing connects to the advertiser. See ANUNCIOS.md.
+  const SPONSOR_AD = null;
 
   const $ = (s) => document.querySelector(s);
   const view = $('#view');
@@ -30,6 +40,8 @@
   let currentTab = 'home';
   let editingInvoiceId = null;
   let installPrompt = null;
+  let session = null;
+  try { session = JSON.parse(localStorage.getItem(SESSION_KEY)); } catch (_) {}
   let waitingWorker = null;
 
   function uid() {
@@ -216,7 +228,15 @@
     if (tab === 'home') renderHome();
     if (tab === 'history') renderHistory();
     if (tab === 'settings') renderSettings();
+    updateAdBar();
     applyUpdateIfIdle();
+  }
+
+  // The network's banner lives in index.html so its robot can find it.
+  // Never where invoices are edited, and never in the Android app.
+  function updateAdBar() {
+    const bar = $('#adBar');
+    if (bar) bar.classList.toggle('off', currentTab !== 'home' && currentTab !== 'history');
   }
 
   // ---------- Device helpers ----------
@@ -245,6 +265,16 @@
   }
 
   // ---------- Screens ----------
+  // Only on the browsing screens and below their content: never where invoices are edited or sent.
+  function adHTML() {
+    if (!SPONSOR_AD || window.AndroidBridge || !location.protocol.startsWith('http')) return '';
+    return `
+      <a class="ad-slot" href="${esc(SPONSOR_AD.link)}" target="_blank" rel="noopener sponsored">
+        <span class="ad-label">Publicidad</span>
+        <img src="${esc(SPONSOR_AD.image)}" alt="${esc(SPONSOR_AD.text)}" />
+      </a>`;
+  }
+
   function hintsHTML() {
     let html = '';
     if (canInstall() && !state.installHintDismissed) {
@@ -320,7 +350,7 @@
     } else {
       html += `<div class="history-list">${recent.map(inv => historyCardHTML(inv)).join('')}</div>`;
     }
-    view.innerHTML = html;
+    view.innerHTML = html + adHTML();
   }
 
   function historyCardHTML(inv, allowDelete = false) {
@@ -345,7 +375,7 @@
       view.innerHTML = `<div class="empty"><strong>No hay facturas todavía</strong>Tu historial aparecerá aquí.</div>`;
       return;
     }
-    view.innerHTML = `<div class="history-list">${list.map(inv => historyCardHTML(inv, true)).join('')}</div>`;
+    view.innerHTML = `<div class="history-list">${list.map(inv => historyCardHTML(inv, true)).join('')}</div>${adHTML()}`;
   }
 
   function currencyOptions(selected) {
@@ -403,6 +433,13 @@
           <button class="secondary" data-action="import-backup">Importar copia</button>
         </div>
       </section>
+      ${needsAccount() && session ? `
+      <section class="card form-card">
+        <div class="kicker">Tu cuenta</div>
+        <p class="settings-note"><strong>${esc(session.nombre || session.correo)}</strong><br>${esc(session.correo)}</p>
+        ${session.admin ? '<button class="secondary" data-action="show-users">Ver usuarios</button>' : ''}
+        <button class="secondary" data-action="logout">Cerrar sesión</button>
+      </section>` : ''}
       ${canInstall() ? `
       <section class="card form-card">
         <div class="kicker">Instalar en tu móvil</div>
@@ -414,7 +451,7 @@
         <h3 style="margin-top:6px">MBM Invoice</h3>
         <p class="settings-note" style="margin-top:6px">Versión ${APP_VERSION} · Creado por Mauricio Benitez</p>
         <a class="brand-link" href="https://kynari.dev/" target="_blank" rel="noopener">by Kynari</a>
-        <p class="settings-note">Gratis. Sin cuentas ni anuncios. Tus datos no salen del dispositivo salvo que tú exportes o compartas un archivo.</p>
+        <p class="settings-note">Gratis${adHTML() || $('#adBar') ? '' : ' y sin anuncios'}. Tus facturas no salen del dispositivo salvo que tú exportes o compartas un archivo.${needsAccount() ? ' Para entrar usas tu cuenta de Google: guardamos tu nombre, tu correo y cuándo usas la app. <a href="privacidad.html">Política de privacidad</a>.' : ''}</p>
       </section>
       <button class="danger" data-action="erase-all">Borrar todos mis datos</button>`;
   }
@@ -422,6 +459,7 @@
   function openInvoiceEditor(id) {
     editingInvoiceId = id;
     currentTab = 'invoice';
+    updateAdBar();
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     renderInvoiceEditor();
   }
@@ -636,6 +674,7 @@
   }
 
   function closeModal() {
+    document.body.classList.remove('ad-over-modal');
     modalBackdrop.classList.add('hidden');
     modalBackdrop.setAttribute('aria-hidden', 'true');
     modal.innerHTML = '';
@@ -1416,6 +1455,7 @@
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     installPrompt = e;
+    renderInstallOffer();
     if (currentTab === 'home' && !$('#modalBackdrop:not(.hidden)')) renderHome();
   });
 
@@ -1459,6 +1499,210 @@
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{});
   }
 
+  // ---------- Account ----------
+  // The Android app has no web sign-in: it keeps working without an account.
+  function needsAccount() {
+    return !window.AndroidBridge && location.protocol.startsWith('http');
+  }
+
+  function saveSession() {
+    try {
+      if (session) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      else localStorage.removeItem(SESSION_KEY);
+    } catch (_) {}
+  }
+
+  function startGoogleLogin() {
+    if (!navigator.onLine) return showLogin('Necesitas conexión a internet para entrar.');
+    const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, '0')).join('');
+    try { localStorage.setItem(NONCE_KEY, nonce); } catch (_) {}
+    const params = new URLSearchParams({
+      client_id: GOOGLE_CLIENT_ID,
+      redirect_uri: location.origin + location.pathname.replace(/index\.html$/, ''),
+      response_type: 'id_token',
+      scope: 'openid email profile',
+      nonce,
+      prompt: 'select_account'
+    });
+    location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
+  }
+
+  // Google comes back with the result after the # of the address.
+  function readGoogleReturn() {
+    const params = new URLSearchParams(location.hash.slice(1));
+    if (!params.has('id_token') && !params.has('error')) return null;
+    history.replaceState(null, '', location.pathname);
+    let nonce = null;
+    try {
+      nonce = localStorage.getItem(NONCE_KEY);
+      localStorage.removeItem(NONCE_KEY);
+    } catch (_) {}
+    const idToken = params.get('id_token');
+    if (!idToken) return { error: params.get('error') === 'access_denied' ? 'Para usar la app hay que entrar con Google.' : 'Google no pudo completar la entrada. Inténtalo de nuevo.' };
+    try {
+      const payload = JSON.parse(decodeURIComponent(escape(atob(idToken.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))));
+      if (nonce && payload.nonce === nonce) return { idToken };
+    } catch (_) {}
+    return { error: 'No se pudo comprobar la entrada. Inténtalo de nuevo.' };
+  }
+
+  function showLogin(message) {
+    const blocked = isInAppBrowser();
+    document.body.classList.add('ad-over-modal');
+    openModal(`
+      <div class="kicker">Bienvenido</div>
+      <h2>Entra para usar MBM Invoice</h2>
+      <p class="subtitle">${blocked ? `Estás dentro de otra aplicación y Google no permite entrar desde aquí. Abre esta página en ${isIOS() ? 'Safari' : 'Chrome'}.` : 'Usa tu cuenta de Google. Tus facturas siguen guardadas solo en este dispositivo: de ti guardamos tu nombre, tu correo y cuándo usas la app.'}</p>
+      ${message ? `<p class="login-error" role="alert">${esc(message)}</p>` : ''}
+      ${blocked ? '' : '<div class="modal-actions one"><button id="googleLogin" class="primary blue">Continuar con Google</button></div>'}
+      <p class="settings-note login-privacy"><a href="privacidad.html">Política de privacidad</a></p>
+    `, false);
+    const btn = $('#googleLogin');
+    if (btn) btn.onclick = startGoogleLogin;
+  }
+
+  async function finishLogin(idToken) {
+    openModal('<h2>Entrando…</h2><p class="subtitle">Un momento, por favor.</p>', false);
+    try {
+      const res = await fetch(`${API_URL}/registro`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_token: idToken })
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      session = { token: data.sesion, nombre: data.nombre, correo: data.correo, admin: !!data.admin };
+      saveSession();
+      closeModal();
+      if (currentTab === 'settings') renderSettings();
+      showInstallOffer(finishStart);
+    } catch (_) {
+      showLogin('No pudimos completar la entrada. Revisa tu conexión e inténtalo de nuevo.');
+    }
+  }
+
+  // Counts an open. Without internet nothing happens: the app keeps working.
+  async function reportUse() {
+    try {
+      const res = await fetch(`${API_URL}/uso`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.token}` },
+        body: JSON.stringify({ version: APP_VERSION })
+      });
+      if (res.status === 401) {
+        session = null;
+        saveSession();
+        return showLogin('Tu sesión terminó. Entra de nuevo.');
+      }
+      if (!res.ok) return;
+      const data = await res.json();
+      session = { ...session, nombre: data.nombre, correo: data.correo, admin: !!data.admin };
+      saveSession();
+      if (currentTab === 'settings') renderSettings();
+    } catch (_) {}
+  }
+
+  function confirmLogout() {
+    openModal(`
+      <h2>¿Cerrar sesión?</h2>
+      <p class="subtitle">Tus facturas seguirán en este dispositivo. Para volver a usarlas tendrás que entrar de nuevo con Google, con internet.</p>
+      <div class="modal-actions">
+        <button id="cancelLogout" class="secondary">Cancelar</button>
+        <button id="confirmLogout" class="danger">Cerrar sesión</button>
+      </div>
+    `, false);
+    $('#cancelLogout').onclick = closeModal;
+    $('#confirmLogout').onclick = () => {
+      session = null;
+      saveSession();
+      setTab('home');
+      showLogin();
+    };
+  }
+
+  async function showUsers() {
+    openModal('<h2>Usuarios</h2><p class="subtitle">Cargando…</p>');
+    const shortDate = (iso) => new Date(iso).toLocaleDateString('es', { day: 'numeric', month: 'short', year: 'numeric' });
+    let body;
+    try {
+      const res = await fetch(`${API_URL}/usuarios`, { headers: { Authorization: `Bearer ${session.token}` } });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      body = `
+        <p class="subtitle">${data.total} ${data.total === 1 ? 'persona registrada' : 'personas registradas'} · ${data.activos_7_dias} activas en los últimos 7 días</p>
+        <div class="user-list">${data.usuarios.map((u) => `
+          <div class="user-row">
+            <strong>${esc(u.nombre || u.correo)}</strong>
+            <span>${esc(u.correo)}</span>
+            <span>Desde ${esc(shortDate(u.creado))} · Último uso ${esc(shortDate(u.ultimo_uso))} · ${Number(u.aperturas)} ${Number(u.aperturas) === 1 ? 'apertura' : 'aperturas'}</span>
+          </div>`).join('')}</div>`;
+    } catch (_) {
+      body = '<p class="subtitle">No se pudo cargar la lista. Revisa tu conexión.</p>';
+    }
+    openModal(`<h2>Usuarios</h2>${body}<div class="modal-actions one"><button id="closeUsers" class="secondary">Cerrar</button></div>`);
+    $('#closeUsers').onclick = closeModal;
+  }
+
+  // Shown right after signing up, floating over the app.
+  let installOfferNext = null;
+
+  function renderInstallOffer() {
+    const box = $('#installOffer');
+    if (!box) return;
+    const iosNote = isIOS() ? ' Al abrirla desde la pantalla de inicio tendrás que entrar otra vez con Google.' : '';
+    box.innerHTML = `
+      <div class="kicker">Ya tienes tu cuenta</div>
+      <h3>¿Quieres instalar la app?</h3>
+      <p class="settings-note">${esc(installInstructions() + iosNote)}</p>
+      <div class="hint-actions">
+        ${installPrompt ? '<button id="installOfferYes" class="primary blue">Instalar</button>' : ''}
+        <button id="installOfferNo" class="ghost">${installPrompt ? 'Ahora no' : 'Entendido'}</button>
+      </div>`;
+    const yes = $('#installOfferYes');
+    if (yes) yes.onclick = () => {
+      closeInstallOffer();
+      runInstall();
+    };
+    $('#installOfferNo').onclick = closeInstallOffer;
+  }
+
+  function closeInstallOffer() {
+    const box = $('#installOffer');
+    if (box) box.remove();
+    const next = installOfferNext;
+    installOfferNext = null;
+    if (next) next();
+  }
+
+  function showInstallOffer(next) {
+    if (!canInstall()) return next();
+    installOfferNext = next;
+    state.installHintDismissed = true;
+    saveState();
+    if (currentTab === 'home') renderHome();
+    const box = document.createElement('section');
+    box.id = 'installOffer';
+    box.className = 'install-offer';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', 'Instalar la app');
+    document.body.appendChild(box);
+    renderInstallOffer();
+  }
+
+  function finishStart() {
+    if (!state.settings.initialized) showSetup();
+  }
+
+  function startApp() {
+    if (!needsAccount()) return finishStart();
+    const googleReturn = readGoogleReturn();
+    if (googleReturn && googleReturn.idToken) return finishLogin(googleReturn.idToken);
+    if (googleReturn) return showLogin(googleReturn.error);
+    if (!session) return showLogin();
+    finishStart();
+    reportUse();
+  }
+
   // ---------- Events ----------
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-action]');
@@ -1481,6 +1725,8 @@
     if (action === 'import-backup') importFile.click();
     if (action === 'erase-all') confirmEraseAll();
     if (action === 'install') runInstall();
+    if (action === 'logout') confirmLogout();
+    if (action === 'show-users') showUsers();
     if (action === 'dismiss-install') {
       state.installHintDismissed = true;
       saveState();
@@ -1500,7 +1746,11 @@
 
   document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => setTab(btn.dataset.tab)));
 
+  if (window.AndroidBridge || !location.protocol.startsWith('http')) {
+    const bar = $('#adBar');
+    if (bar) bar.remove();
+  }
   registerServiceWorker();
   setTab('home');
-  if (!state.settings.initialized) showSetup();
+  startApp();
 })();

@@ -14,7 +14,11 @@
     document.head.appendChild(csp);
   }
 
-  const APP_VERSION = '0.9.1';
+  const APP_VERSION = '0.9.2';
+  // The ad screen before sharing or saving an invoice. Set to false to turn it off.
+  const AD_BEFORE_DELIVERY = true;
+  const AD_WAIT_SECONDS = 5;
+  const AD_LOAD_TIMEOUT_MS = 3000;
   const STORAGE_KEY = 'mbm_invoice_v1_state';
   // Kept apart from the invoices so backups never carry the session.
   const SESSION_KEY = 'mbm_invoice_session';
@@ -228,15 +232,7 @@
     if (tab === 'home') renderHome();
     if (tab === 'history') renderHistory();
     if (tab === 'settings') renderSettings();
-    updateAdBar();
     applyUpdateIfIdle();
-  }
-
-  // The network's banner lives in index.html so its robot can find it.
-  // Never where invoices are edited, and never in the Android app.
-  function updateAdBar() {
-    const bar = $('#adBar');
-    if (bar) bar.classList.toggle('off', currentTab !== 'home' && currentTab !== 'history');
   }
 
   // ---------- Device helpers ----------
@@ -459,7 +455,6 @@
   function openInvoiceEditor(id) {
     editingInvoiceId = id;
     currentTab = 'invoice';
-    updateAdBar();
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     renderInvoiceEditor();
   }
@@ -674,7 +669,7 @@
   }
 
   function closeModal() {
-    document.body.classList.remove('ad-over-modal');
+    document.body.classList.remove('ad-over-modal', 'ad-gate');
     modalBackdrop.classList.add('hidden');
     modalBackdrop.setAttribute('aria-hidden', 'true');
     modal.innerHTML = '';
@@ -1370,55 +1365,115 @@
     return false;
   }
 
+  // Shows the banner above a screen with a button that unlocks by itself and never advances alone.
+  // It must not hold the task back: without internet, or if the banner doesn't load, the person goes on.
+  function showAdGate(onContinue, onBack) {
+    const frame = $('#adBar iframe');
+    if (!AD_BEFORE_DELIVERY || !frame || navigator.onLine === false) return onContinue();
+    document.body.classList.add('ad-gate');
+    toastEl.classList.add('hidden');
+    openModal(`
+      <div class="kicker">Publicidad</div>
+      <h2>Un momento</h2>
+      <p class="subtitle">El anuncio de arriba ayuda a mantener la app gratis. En unos segundos podrás continuar.</p>
+      <div class="modal-actions">
+        <button id="adGateBack" class="secondary">Volver</button>
+        <button id="adGateContinue" class="primary blue" disabled>Continuar (${AD_WAIT_SECONDS})</button>
+      </div>
+    `, false);
+    const btn = $('#adGateContinue');
+    const deadline = Date.now() + AD_WAIT_SECONDS * 1000;
+    const loadDeadline = Date.now() + AD_LOAD_TIMEOUT_MS;
+    let loaded = false;
+    let timer = null;
+    const onLoad = () => { loaded = true; };
+    const unlock = () => {
+      clearInterval(timer);
+      window.removeEventListener('offline', unlock);
+      btn.disabled = false;
+      btn.textContent = 'Continuar';
+    };
+    const leave = (next) => {
+      clearInterval(timer);
+      frame.removeEventListener('load', onLoad);
+      window.removeEventListener('offline', unlock);
+      document.body.classList.remove('ad-gate');
+      next();
+    };
+    frame.addEventListener('load', onLoad);
+    window.addEventListener('offline', unlock);
+    // Loading it again is the only way to know a cross-site frame really arrived.
+    frame.src = frame.src;
+    timer = setInterval(() => {
+      const left = Math.ceil((deadline - Date.now()) / 1000);
+      if (left <= 0 || (!loaded && Date.now() >= loadDeadline)) return unlock();
+      btn.textContent = `Continuar (${left})`;
+    }, 200);
+    btn.onclick = () => leave(onContinue);
+    $('#adGateBack').onclick = () => leave(onBack);
+  }
+
   // In a browser the files are prepared first and offered on a screen of their own:
   // iPhone only lets a page share right after a direct tap, and preparing them takes too long for that.
-  function offerFiles(files, title, message, onDone) {
+  function offerFiles(files, title, message, onDone, withAd) {
     const canShare = canShareFiles(files);
     const canOpen = isIOS() && files.length === 1 && files[0].type === 'application/pdf';
-    openModal(`
-      <h2>${esc(title)}</h2>
-      <p class="subtitle">${esc(message)}</p>
-      <div class="stack">
-        ${canShare ? '<button id="deliverShare" class="primary blue">Compartir</button>' : ''}
-        <button id="deliverSave" class="${canShare ? 'secondary' : 'primary blue'}">Guardar en el dispositivo</button>
-        ${canOpen ? '<button id="deliverOpen" class="secondary">Abrir</button>' : ''}
-        <button id="deliverClose" class="ghost">Cerrar</button>
-      </div>
-    `);
+    let adPending = !!withAd;
     const done = () => { if (onDone) onDone(); };
-    $('#deliverClose').onclick = closeModal;
-    $('#deliverSave').onclick = () => {
+    const save = () => {
       files.forEach(file => downloadBlob(file, file.name));
       done();
       toast(files.length > 1 ? 'Guardando las páginas…' : 'Archivo guardado.');
     };
-    if (canShare) {
-      $('#deliverShare').onclick = async () => {
-        try {
-          await navigator.share({files, title: files[0].name});
-          done();
-          closeModal();
-        } catch (e) {
-          if (!e || e.name !== 'AbortError') toast('No se pudo compartir. Usa «Guardar en el dispositivo».');
-        }
-      };
-    }
-    if (canOpen) {
-      $('#deliverOpen').onclick = () => {
-        const url = URL.createObjectURL(files[0]);
-        window.open(url, '_blank');
-        setTimeout(() => URL.revokeObjectURL(url), 60000);
+    const share = async () => {
+      try {
+        await navigator.share({files, title: files[0].name});
         done();
-      };
-    }
+        closeModal();
+      } catch (e) {
+        if (!e || e.name !== 'AbortError') toast('No se pudo compartir. Usa «Guardar en el dispositivo».');
+      }
+    };
+    const open = () => {
+      const url = URL.createObjectURL(files[0]);
+      window.open(url, '_blank');
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      done();
+    };
+    // One ad per set of files. The action runs inside the tap on Continuar, which is what iPhone needs to share.
+    const afterAd = (action) => () => {
+      if (!adPending) return action();
+      showAdGate(() => {
+        adPending = false;
+        render();
+        action();
+      }, render);
+    };
+    const render = () => {
+      openModal(`
+        <h2>${esc(title)}</h2>
+        <p class="subtitle">${esc(message)}</p>
+        <div class="stack">
+          ${canShare ? '<button id="deliverShare" class="primary blue">Compartir</button>' : ''}
+          <button id="deliverSave" class="${canShare ? 'secondary' : 'primary blue'}">Guardar en el dispositivo</button>
+          ${canOpen ? '<button id="deliverOpen" class="secondary">Abrir</button>' : ''}
+          <button id="deliverClose" class="ghost">Cerrar</button>
+        </div>
+      `);
+      $('#deliverClose').onclick = closeModal;
+      $('#deliverSave').onclick = afterAd(save);
+      if (canShare) $('#deliverShare').onclick = afterAd(share);
+      if (canOpen) $('#deliverOpen').onclick = afterAd(open);
+    };
+    render();
   }
 
-  async function deliverFiles(files, title, message, onDone) {
+  async function deliverFiles(files, title, message, onDone, withAd) {
     if (await shareThroughBridge(files)) {
       if (onDone) onDone();
       return;
     }
-    offerFiles(files, title, message, onDone);
+    offerFiles(files, title, message, onDone, withAd);
   }
 
   async function shareInvoice(id, type) {
@@ -1433,11 +1488,11 @@
         const suffix = canvases.length > 1 ? `-pagina-${i + 1}` : '';
         files.push(new File([blob], `Invoice-${inv.number}${suffix}.png`, {type:'image/png'}));
       }
-      await deliverFiles(files, files.length > 1 ? `Tus ${files.length} imágenes están listas` : 'Tu imagen está lista', 'Compártela por WhatsApp o guárdala en tu dispositivo.');
+      await deliverFiles(files, files.length > 1 ? `Tus ${files.length} imágenes están listas` : 'Tu imagen está lista', 'Compártela por WhatsApp o guárdala en tu dispositivo.', null, true);
     } else {
       const blob = await buildPdf(inv);
       const file = new File([blob], `Invoice-${inv.number}.pdf`, {type:'application/pdf'});
-      await deliverFiles([file], 'Tu PDF está listo', 'Compártelo por WhatsApp o correo, o guárdalo en tu dispositivo.');
+      await deliverFiles([file], 'Tu PDF está listo', 'Compártelo por WhatsApp o correo, o guárdalo en tu dispositivo.', null, true);
     }
   }
 

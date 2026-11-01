@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CEO — Kynari | Ciberseguridad & Desarrollo Seguro</title>
-<meta name="description" content="Conoce a Maikel de Arma, fundador de Kynari, ingeniero en ciberseguridad y experto en desarrollo seguro, inteligencia artificial y automatización.">
-<meta property="og:title" content="Kynari — Sobre mí">
-<meta property="og:description" content="Fundador de Kynari: ingeniero en ciberseguridad, experto en desarrollo seguro, IA y automatización.">
+<title>Equipo — Kynari | Ciberseguridad & Desarrollo Seguro</title>
+<meta name="description" content="Conoce al equipo de Kynari: Maikel de Arma, fundador y CEO, ingeniero en ciberseguridad, y Mauricio Benitez, cofundador.">
+<meta property="og:title" content="Kynari — Equipo">
+<meta property="og:description" content="El equipo de Kynari: Maikel de Arma, fundador y CEO, y Mauricio Benitez, cofundador.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kynari">
 <meta property="og:image" content="https://kynari.dev/kynari-logo.png">
@@ -669,46 +669,111 @@
   }
   footer p { font-size: var(--text-sm); color: var(--muted); }
   footer span { color: var(--accent); }
+
+  /* ─── Cambio de idioma ─── */
+  .nav-links a.nav-lang {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    padding: 6px 10px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    color: var(--fg-2);
+  }
+  .nav-links a.nav-lang::after { display: none; }
+  .nav-links a.nav-lang:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 920px) {
+    .nav-links a.nav-lang { display: block; padding: 10px; margin-top: var(--space-1); text-align: center; font-size: 13px; }
+  }
+
+  /* ─── Equipo ─── */
+  .about-text h3.team-role { margin-top: calc(var(--space-3) * -1); margin-bottom: var(--space-5); }
+  .team-member { padding-bottom: var(--space-24); }
+  .team-initials {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+  }
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  "name": "Sobre mí - Kynari",
+  "name": "Equipo - Kynari",
   "url": "https://kynari.dev/sobre-mi.html",
   "mainEntity": {
-    "@type": "Person",
-    "name": "Maikel de Arma",
-    "jobTitle": "Cybersecurity Developer & Fundador",
-    "description": "Ingeniero en ciberseguridad y fundador de Kynari. Ayuda a negocios y profesionales a proteger sus sistemas y a usar la IA como aliada estratégica.",
-    "image": "https://kynari.dev/mqxe9f5s-mqxe81z6-perfil.jpg",
-    "worksFor": {
-      "@type": "ProfessionalService",
-      "name": "Kynari",
-      "url": "https://kynari.dev/"
-    },
-    "telephone": "+53 55336238",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "CU",
-      "addressLocality": "La Habana"
-    },
-    "knowsAbout": [
-      "Ciberseguridad",
-      "Desarrollo de software seguro",
-      "Automatización",
-      "Inteligencia artificial",
-      "Python",
-      "Django",
-      "FastAPI",
-      "Node.js",
-      "React",
-      "Docker",
-      "Linux"
-    ],
-    "sameAs": [
-      "https://github.com/MaikelMC",
-      "https://www.linkedin.com/in/maikeldearma"
+    "@type": "ProfessionalService",
+    "name": "Kynari",
+    "url": "https://kynari.dev/",
+    "founder": [
+      {
+        "@type": "Person",
+        "@id": "https://kynari.dev/sobre-mi.html#maikel-de-arma",
+        "name": "Maikel de Arma",
+        "jobTitle": "Cybersecurity Developer & Fundador",
+        "description": "Ingeniero en ciberseguridad y fundador de Kynari. Ayuda a negocios y profesionales a proteger sus sistemas y a usar la IA como aliada estratégica.",
+        "image": "https://kynari.dev/mqxe9f5s-mqxe81z6-perfil.jpg",
+        "telephone": "+53 55336238",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CU",
+          "addressLocality": "La Habana"
+        },
+        "knowsAbout": [
+          "Ciberseguridad",
+          "Desarrollo de software seguro",
+          "Automatización",
+          "Inteligencia artificial",
+          "Python",
+          "Django",
+          "FastAPI",
+          "Node.js",
+          "React",
+          "Docker",
+          "Linux"
+        ],
+        "sameAs": [
+          "https://github.com/MaikelMC",
+          "https://www.linkedin.com/in/maikeldearma"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://kynari.dev/sobre-mi.html#mauricio-benitez",
+        "name": "Mauricio Benitez",
+        "jobTitle": "Cofundador",
+        "description": "Cofundador de Kynari. Lidera Kynari Empleos y combina visión de negocio, marketing, administración y tecnología, con automatizaciones y soluciones web apoyadas en inteligencia artificial.",
+        "url": "https://kynari.dev/sobre-mi.html#mauricio-benitez",
+        "worksFor": {
+          "@type": "ProfessionalService",
+          "name": "Kynari",
+          "url": "https://kynari.dev/"
+        },
+        "knowsAbout": [
+          "Marketing digital",
+          "SEO",
+          "Administración de proyectos",
+          "Gestión de producto",
+          "Automatización",
+          "Inteligencia artificial aplicada",
+          "PHP",
+          "Python",
+          "JavaScript",
+          "SQL",
+          "HTML",
+          "CSS",
+          "Linux",
+          "Bots de Telegram"
+        ]
+      }
     ]
   }
 }
@@ -722,11 +787,13 @@
       <a href="index.html" class="nav-brand">Kynari<span>.</span></a>
       <div class="nav-links">
         <a href="servicios.html">Servicios</a>
+        <a href="apps.html">Apps</a>
         <a href="proyectos.html">Proyectos</a>
-        <a href="sobre-mi.html" class="active">CEO</a>
+        <a href="sobre-mi.html" class="active">Equipo</a>
         <a href="noticias.html">Noticias</a>
         <a href="faq.html">FAQ</a>
         <a href="contacto.html" class="nav-cta">Contacto</a>
+        <a href="en/index.html" class="nav-lang" lang="en" hreflang="en" aria-label="English version">EN</a>
       </div>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -739,9 +806,9 @@
 <main>
   <div class="about-header">
     <div class="container">
-      <div class="about-label">Sobre mí</div>
-      <h1 class="about-title">CEO de Kynari</h1>
-      <p class="about-subtitle">Cybersecurity Developer &amp; Fundador</p>
+      <div class="about-label">Equipo</div>
+      <h1 class="about-title">El equipo de Kynari</h1>
+      <p class="about-subtitle">Las personas detrás de Kynari</p>
     </div>
   </div>
 
@@ -768,6 +835,7 @@
         </div>
         <div class="about-text reveal-right reveal-delay-2">
           <h2>Maikel de Arma</h2>
+          <h3 class="team-role">Fundador y CEO</h3>
           <p>Soy Maikel de Arma, ingeniero en ciberseguridad y fundador de <strong>Kynari</strong>. Mi misión es ayudar a negocios y profesionales a operar con la confianza de que sus sistemas están verdaderamente protegidos. Combino el rigor técnico con una visión práctica de negocio; no solo entiendo la tecnología, entiendo los riesgos, las regulaciones y lo que cuesta una brecha de seguridad.</p>
           <p>Más allá de la protección, creo que la mejor defensa es el conocimiento. Por eso ofrezco formación práctica en inteligencia artificial y ciberseguridad para personas y equipos: enseño a usar la IA como aliada estratégica en cualquier ámbito. Desarrollo seguro, automatización, infraestructura cloud y educación convergen en Kynari para darte un acompañamiento 360°.</p>
 
@@ -778,6 +846,36 @@
             <a href="https://www.linkedin.com/in/maikeldearma" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
             <span class="about-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>La Habana / Remoto</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mauricio-benitez" class="team-member">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal-left">
+          <div class="team-initials" aria-hidden="true">MB</div>
+          <div class="about-tags">
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><ellipse cx="7" cy="7" rx="6.5" ry="4.5" fill="#777BB4"/><text x="7" y="9" text-anchor="middle" fill="#fff" font-size="4.6" font-weight="700">php</text></svg>PHP</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="2" fill="#306998"/><rect x="1" y="3" width="12" height="5" rx="1" fill="#FFD43B"/><path d="M4 6h6M7 4v5" stroke="#306998" stroke-width=".8"/></svg>Python</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" fill="#F7DF1E"/><text x="7" y="9.5" text-anchor="middle" fill="#000" font-size="6" font-weight="700">JS</text></svg>JavaScript</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><ellipse cx="7" cy="4" rx="5" ry="2.5" fill="#336791"/><path d="M2 4v6c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V4" fill="#336791"/><path d="M2 7c0 1.4 2.2 2.5 5 2.5S12 8.4 12 7" fill="#2b5b84"/></svg>SQL</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 1h10l-1 10.5L7 13l-4-1.5L2 1z" fill="#E34F26"/><text x="7" y="9.2" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">5</text></svg>HTML / CSS</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="9" cy="4.5" r="2.2" fill="#FCC624"/><path d="M5.5 2.5c0-1.5 2.5-1.2 2.5 0s-1 1.8-2.5 2-1.9 1-1.9 2v3" stroke="#FCC624" stroke-width="1.2" stroke-linecap="round"/><path d="M3.6 9.5c-.8 0-2.5-.2-2.5-1.5s1.7-1.5 2.5-1.5" stroke="#FCC624" stroke-width="1" stroke-linecap="round"/><path d="M3.6 10.5c-1.2 0-3 .3-3 1.5s1.8 1.5 3 1.5" stroke="#FCC624" stroke-width="1" stroke-linecap="round"/></svg>Linux</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" fill="#26A5E4"/><path d="M3 6.8l7.4-2.9-1.2 6.4-2.1-1.5-1.1 1.1-.2-1.8L9 5.2 4.7 7.5 3 6.8z" fill="#fff"/></svg>Bots de Telegram</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="var(--accent)" stroke-width="1"/><path d="M7 3v4l2 2" stroke="var(--accent)" stroke-width="1" stroke-linecap="round"/></svg>Automatización</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.4 4.1L12.5 7 8.4 8.4 7 13 5.6 8.4 1.5 7l4.1-1.9L7 1z" fill="var(--accent)"/></svg>IA aplicada</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4" stroke="var(--accent)" stroke-width="1.2"/><path d="M9 9l3.5 3.5" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/></svg>SEO</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5.5v3l2 .2L10.5 11V3L4 5.3l-2 .2z" stroke="var(--accent)" stroke-width="1" stroke-linejoin="round"/><path d="M4.5 9l.8 3h1.3l-.7-2.6M12 6v2" stroke="var(--accent)" stroke-width="1" stroke-linecap="round"/></svg>Marketing digital</span>
+            <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="4.5" width="11" height="8" rx="1.2" stroke="var(--accent)" stroke-width="1"/><path d="M5 4.5V3a1 1 0 011-1h2a1 1 0 011 1v1.5M1.5 8h11" stroke="var(--accent)" stroke-width="1"/></svg>Administración</span>
+          </div>
+        </div>
+        <div class="about-text reveal-right">
+          <h2>Mauricio Benitez</h2>
+          <h3 class="team-role">Cofundador</h3>
+          <p>Soy Mauricio Benitez, cofundador de <strong>Kynari</strong>. Mi misión es convertir las ideas en productos digitales que resuelvan problemas reales y lleguen a las personas. Combino la visión de negocio con el marketing, la administración y la tecnología; no solo pienso en cómo se construye un producto, sino en cómo se da a conocer, cómo se gestiona y cómo crece.</p>
+          <p>Lidero Kynari Empleos, la plataforma de empleo para Cuba, donde coordino el producto, los contenidos, el posicionamiento en buscadores y los canales digitales. Además, desarrollo automatizaciones y soluciones web con apoyo de la inteligencia artificial, para que negocios y personas ahorren tiempo y trabajen mejor. Tecnología, marketing y gestión convergen en mi trabajo para acompañar cada proyecto de principio a fin.</p>
         </div>
       </div>
     </div>

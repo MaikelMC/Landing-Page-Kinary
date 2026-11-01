@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kynari - Cybersecurity Services and Custom Apps</title>
+<meta name="description" content="Cybersecurity, custom apps, business systems, automation, AI training and websites for businesses and individuals. See what Kynari offers.">
+<meta property="og:title" content="Kynari — Services">
+<meta property="og:description" content="Cybersecurity, custom apps, automation and AI: modular services for businesses and individuals.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kynari">
+<meta property="og:image" content="https://kynari.dev/kynari-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kynari.dev/kynari-logo.png">
+<link rel="canonical" href="https://kynari.dev/en/services.html">
+<link rel="alternate" hreflang="es" href="https://kynari.dev/servicios.html">
+<link rel="alternate" hreflang="en" href="https://kynari.dev/en/services.html">
+<link rel="alternate" hreflang="x-default" href="https://kynari.dev/servicios.html">
+<meta property="og:url" content="https://kynari.dev/en/services.html">
+
+<link rel="icon" type="image/png" href="../kynari-logo.png">
+<link rel="apple-touch-icon" href="../kynari-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --surface: #0a0a0a;
+    --surface-elevated: #111111;
+    --fg: #f0ece4;
+    --fg-2: #c8c0b0;
+    --muted: #8a8070;
+    --accent: #d4af37;
+    --accent-on: #000000;
+    --accent-glow: rgba(212,175,55,0.15);
+    --accent-glow-strong: rgba(212,175,55,0.25);
+    --border-subtle: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --glass-bg: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+    --glass-highlight: rgba(255,255,255,0.05);
+    --font-display: "Inter Tight", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-body: "Inter", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+    --text-xs: 11px;
+    --text-sm: 13px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-xl: 28px;
+    --text-2xl: 42px;
+    --text-3xl: 64px;
+    --leading-body: 1.5;
+    --leading-tight: 1.05;
+    --tracking-display: -0.02em;
+    --tracking-wide: 0.08em;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 980px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --container-max: 960px;
+    --container-gutter: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--fg);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100dvh;
+    width: 100%;
+  }
+
+  /* ─── Mesh Gradient Background ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(100,180,255,0.02) 0%, transparent 40%),
+      radial-gradient(ellipse 50% 60% at 50% 80%, rgba(212,175,55,0.03) 0%, transparent 50%);
+  }
+
+  /* ─── Noise Overlay ─── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: var(--accent); text-decoration: none; transition: color 0.4s var(--ease-out-expo); }
+  a:hover { color: var(--fg); }
+  p { text-wrap: pretty; }
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ─── Navigation (Floating Glass Pill) ─── */
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    pointer-events: none;
+  }
+  nav .container {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: 12px 24px;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 8px 32px rgba(0,0,0,0.4);
+    pointer-events: all;
+  }
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    white-space: nowrap;
+    transition: opacity 0.3s var(--ease-out-expo);
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-brand:hover { opacity: 0.7; }
+
+  .nav-cta {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    padding: 8px 20px;
+    background: var(--accent);
+    color: var(--accent-on);
+    border-radius: var(--radius-pill);
+    transition: all 0.4s var(--ease-out-expo);
+  }
+  .nav-cta:hover {
+    background: var(--fg);
+    color: var(--bg);
+    transform: scale(1.02);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    margin-left: auto;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--fg);
+    transition: all 0.4s var(--ease-out-expo);
+    transform-origin: center;
+  }
+  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-6px); }
+  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(280px, 75vw);
+    height: 100dvh;
+    min-height: 100dvh;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(40px) saturate(1.6);
+    -webkit-backdrop-filter: blur(40px) saturate(1.6);
+    flex-direction: column;
+    padding: 80px var(--space-5) var(--space-6);
+    gap: var(--space-1);
+    border-left: 1px solid var(--glass-border);
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.45s var(--ease-out-expo);
+    z-index: 101;
+  }
+  .nav-links.open { display: flex; transform: translateX(0); opacity: 1; pointer-events: all; }
+  .nav-links a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    padding: var(--space-3) var(--space-4);
+    color: var(--muted);
+    border-radius: var(--radius-sm);
+  }
+  .nav-links a:hover {
+    color: var(--fg);
+    background: rgba(255,255,255,0.04);
+  }
+  .nav-links a.active {
+    color: var(--accent);
+    background: rgba(212,175,55,0.06);
+  }
+  .nav-links a.nav-cta {
+    margin-top: var(--space-4);
+    padding: var(--space-3) var(--space-5);
+    background: var(--accent);
+    color: var(--accent-on);
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    text-align: center;
+  }
+  .nav-links a.nav-cta:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  /* ─── Desktop nav-links ─── */
+  @media (min-width: 921px) {
+    .nav-links {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-5);
+      height: auto;
+      min-height: 0;
+      padding: 0;
+      width: auto;
+      background: none;
+      backdrop-filter: none;
+      border: none;
+      transform: none;
+      opacity: 1;
+      pointer-events: all;
+      z-index: auto;
+      transition: none;
+    }
+    .nav-links a {
+      display: inline;
+      width: auto;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      color: var(--muted);
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 0;
+      border-radius: 0;
+      text-align: left;
+      position: relative;
+      opacity: 1;
+      transform: none;
+      transition: color 0.4s var(--ease-out-expo);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.4s var(--ease-out-expo);
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover::after { width: 100%; background: var(--accent); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a.nav-cta {
+      display: inline;
+      margin-top: 0;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      padding: 8px 20px;
+      background: var(--accent);
+      color: var(--accent-on);
+      border-radius: var(--radius-pill);
+      text-align: center;
+      width: auto;
+    }
+    .nav-links a.nav-cta:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+  }
+
+  @media (max-width: 920px) {
+    .nav-toggle { display: flex; }
+    nav {
+      top: 12px;
+      left: 16px;
+      right: 16px;
+      width: auto;
+      display: block;
+    }
+    nav .container {
+      display: block;
+    }
+    .nav-pill {
+      padding: 10px 16px;
+      justify-content: space-between;
+    }
+
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,5,5,0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 98;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease-out-expo);
+    }
+    .nav-backdrop.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav-links.open a {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .nav-links.open a:nth-child(1) { transition-delay: 0.06s; }
+    .nav-links.open a:nth-child(2) { transition-delay: 0.1s; }
+    .nav-links.open a:nth-child(3) { transition-delay: 0.14s; }
+    .nav-links.open a:nth-child(4) { transition-delay: 0.18s; }
+    .nav-links.open a:nth-child(5) { transition-delay: 0.22s; }
+    .nav-links.open a:nth-child(6) { transition-delay: 0.26s; }
+    .nav-links.open a.nav-cta { transition-delay: 0.3s; }
+    .nav-links a {
+      opacity: 0;
+      transform: translateX(24px);
+      transition: all 0.4s var(--ease-out-expo), background 0.3s;
+    }
+  }
+
+  /* ─── Buttons ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-out-expo);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    position: relative;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--accent-on);
+    padding: 12px 28px;
+  }
+  .btn-primary:hover {
+    background: #e0c040; color: var(--accent-on);
+    box-shadow: 0 0 40px var(--accent-glow);
+  }
+  .btn-secondary {
+    background: transparent; color: var(--fg);
+    padding: 12px 28px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.3);
+  }
+  .btn-lg { padding: 16px 36px; font-size: var(--text-base); }
+
+  /* ─── Section defaults ─── */
+  section { padding: 120px 0; position: relative; z-index: 1; }
+  @media (max-width: 920px) { section { padding: 80px 0; } }
+  @media (max-width: 600px) { section { padding: 60px 0; } }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+    color: var(--fg);
+    margin-bottom: var(--space-4);
+  }
+  @media (max-width: 600px) { .section-title { font-size: var(--text-xl); } }
+  .section-desc {
+    font-size: var(--text-base);
+    color: var(--muted);
+    max-width: 600px;
+    line-height: var(--leading-body);
+  }
+
+  /* ─── Scroll Reveal ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    will-change: opacity, transform;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  .stagger-children > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+  .stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .stagger-children.visible > *:nth-child(2) { transition-delay: 0.12s; }
+  .stagger-children.visible > *:nth-child(3) { transition-delay: 0.19s; }
+  .stagger-children.visible > *:nth-child(4) { transition-delay: 0.26s; }
+  .stagger-children.visible > *:nth-child(5) { transition-delay: 0.33s; }
+  .stagger-children.visible > *:nth-child(6) { transition-delay: 0.40s; }
+  .stagger-children.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── Page Header ─── */
+  .page-header {
+    padding: 160px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(80px);
+    opacity: 0.6;
+  }
+  .page-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: var(--space-6);
+    padding: 6px 16px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.1s forwards;
+  }
+  .page-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .page-header .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8vw, var(--text-3xl));
+    font-weight: 700;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+    color: var(--fg);
+    margin-bottom: var(--space-6);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
+  }
+  .page-header .section-desc {
+    font-size: var(--text-lg);
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s var(--ease-out-expo) 0.35s forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* ─── Service Pricing Cards (Ethereal Glass) ─── */
+  #servicios { padding-top: 80px; }
+
+  .services-pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-10);
+  }
+
+  .pricing-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-5);
+    text-align: center;
+    transition: all 0.5s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .pricing-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px var(--accent-glow);
+  }
+  .pricing-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-out-expo);
+  }
+  .pricing-card:hover::after { opacity: 1; }
+
+  .pricing-card--featured {
+    border-color: var(--accent);
+    border-width: 1.5px;
+    background: linear-gradient(180deg, color-mix(in oklab, var(--glass-bg), var(--accent) 6%), var(--glass-bg));
+    box-shadow: 0 0 30px var(--accent-glow);
+  }
+  .pricing-card--featured::before {
+    content: 'Popular';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--accent);
+    color: var(--accent-on);
+    padding: 3px 14px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    line-height: 1;
+  }
+  .pricing-card--featured:hover {
+    border-color: var(--accent);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 60px var(--accent-glow-strong);
+  }
+  .pricing-card--featured::after { display: none; }
+
+  .pricing-card--alt {
+    background: linear-gradient(180deg, color-mix(in oklab, var(--glass-bg), #39a852 4%), var(--glass-bg));
+  }
+  .pricing-card--alt .pricing-icon {
+    background: rgba(57,168,82,0.08);
+    border-color: rgba(57,168,82,0.2);
+    color: #39a852;
+  }
+  .pricing-card--alt:hover .pricing-icon {
+    border-color: #39a852;
+    box-shadow: 0 0 20px rgba(57,168,82,0.1);
+  }
+
+  .pricing-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: var(--space-4);
+    color: var(--accent);
+    transition: all 0.4s var(--ease-out-expo);
+    background: color-mix(in oklab, var(--bg), var(--accent) 3%);
+  }
+  .pricing-card:hover .pricing-icon {
+    border-color: var(--accent);
+    transform: scale(1.06);
+  }
+  .pricing-icon svg {
+    width: 22px; height: 22px;
+  }
+
+  .pricing-name {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--fg);
+    margin-bottom: var(--space-2);
+  }
+  .pricing-desc {
+    font-size: 13px;
+    color: var(--fg-2);
+    line-height: 1.55;
+    margin-bottom: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .pricing-tiers {
+    width: 100%;
+    margin-bottom: var(--space-5);
+    flex: 1;
+  }
+  .pricing-tier {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    gap: var(--space-2);
+  }
+  .pricing-tier:last-child { border-bottom: none; }
+  .pricing-tier-badge {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1px 6px;
+    border-radius: var(--radius-pill);
+    background: rgba(57,168,82,0.15);
+    color: #39a852;
+    margin-left: var(--space-1);
+    vertical-align: middle;
+  }
+  .pricing-tier-name {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-2);
+    text-align: left;
+    flex: 1;
+  }
+  .pricing-tier-name small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 10px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+    margin-top: 1px;
+    line-height: 1.4;
+  }
+  .pricing-tier-price {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .pricing-tier-price small {
+    font-weight: 400;
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .pricing-amount {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+  .pricing-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+  }
+  .pricing-btn {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 8px 24px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    color: var(--fg);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-out-expo);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .pricing-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-on);
+    box-shadow: 0 0 30px var(--accent-glow);
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-8) 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  footer p { font-size: var(--text-sm); color: var(--muted); }
+  footer span { color: var(--accent); }
+
+  /* ─── Language switch ─── */
+  .nav-links a.nav-lang {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    padding: 6px 10px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    color: var(--fg-2);
+  }
+  .nav-links a.nav-lang::after { display: none; }
+  .nav-links a.nav-lang:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 920px) {
+    .nav-links a.nav-lang { display: block; padding: 10px; margin-top: var(--space-1); text-align: center; font-size: 13px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Kynari Services",
+  "url": "https://kynari.dev/en/services.html",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Service",
+          "name": "Cybersecurity",
+          "description": "Practical protection against phishing, data theft, unauthorized access and website vulnerabilities. Diagnosis, training and ongoing protection.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "75",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Service",
+          "name": "Telegram Bots",
+          "description": "Automate sales, support and notifications 24/7 with smart Telegram bots. Ideal for businesses looking for reach without extra staff costs.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "50",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Service",
+          "name": "Process Automation",
+          "description": "Zapier/n8n workflows and custom scripts (Python/Node) that remove manual tasks. Saves 10-20 hours a week from the first month.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "70",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Service",
+          "name": "Website Creation",
+          "description": "From landing pages to complete e-commerce. A professional, responsive online presence optimized for mobile. Ready in 7-14 days.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "130",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "Service",
+          "name": "AI Training",
+          "description": "Learn to write effective prompts, automate daily tasks and apply AI tools in your business or profession. Practical training in small groups.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "60",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "Service",
+          "name": "AI Chatbots for Websites",
+          "description": "Smart widget trained with your business data (FAQ, products, policies). Answers 24/7, hands off to humans and generates analytics.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "150",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "item": {
+          "@type": "Service",
+          "name": "Custom Apps",
+          "description": "We build the app or website you need to solve a specific problem or bring your own project to life, whether you run a business or have a personal idea.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "item": {
+          "@type": "Service",
+          "name": "Business Systems",
+          "description": "Inventory, orders, bookings and customers in one place, with less paperwork and less repetitive work.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 9,
+        "item": {
+          "@type": "Service",
+          "name": "First Version of Your Idea",
+          "description": "A simple version of your app to test with real people before investing heavily.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 10,
+        "item": {
+          "@type": "Service",
+          "name": "Monthly Maintenance",
+          "description": "Updates and support to keep your website or app running well after delivery.",
+          "provider": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/en/"
+          }
+        }
+      }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-pill">
+      <a href="index.html" class="nav-brand">Kynari<span>.</span></a>
+      <div class="nav-links">
+        <a href="services.html" class="active">Services</a>
+        <a href="apps.html">Apps</a>
+        <a href="index.html#team">Team</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+        <a href="../servicios.html" class="nav-lang" lang="es" hreflang="es" aria-label="Versión en español">ES</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-backdrop"></div>
+
+<main>
+  <section id="services" data-od-id="servicios">
+    <div class="container">
+      <div class="page-header">
+        <p class="page-label">Services</p>
+        <h1 class="section-title">Modular cybersecurity, automation and AI solutions</h1>
+        <p class="section-desc">Modular cybersecurity, custom app, automation and AI solutions for businesses and for individuals with a project of their own.</p>
+      </div>
+
+      <div class="services-pricing stagger-children">
+
+        <!-- ── Card 1: Cybersecurity ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="pricing-name">Cybersecurity</div>
+          <div class="pricing-desc">Practical protection against phishing, data theft, unauthorized access and website vulnerabilities. Diagnosis, training and ongoing protection.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Basic · Diagnosis<small>Review of website, email, WhatsApp, passwords • Risk report • 30-min walkthrough meeting</small></span>
+              <span class="pricing-tier-price">$75 <small></small></span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Standard · Protection<span class="pricing-tier-badge" style="background:rgba(212,175,55,0.15);color:var(--accent)">Recommended</span><small>Everything in Basic + 2h training • 2FA • Passwords • Backups • SSL • Antivirus • 30 days of support</small></span>
+              <span class="pricing-tier-price">$180<small></small></span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Premium · Web + Apps<small>Everything in Standard + Website/app audit • Vulnerability fixes • 60 days of support • Monthly monitoring</small></span>
+              <span class="pricing-tier-price">$300<small></small></span>
+            </div>
+          </div>
+          <div class="pricing-amount">From $75</div>
+          <div class="pricing-label">diagnosis in 3-4 days</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Card 2: Telegram Bots ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2.5L2.5 10.5l7 2.8 2.8 7 2.8-7 3.5-3.5"/><path d="M12 10.5l-7 2.8"/></svg>
+          </div>
+          <div class="pricing-name">Telegram Bots</div>
+          <div class="pricing-desc">Automate sales, support and notifications 24/7 with smart Telegram bots. Ideal for businesses looking for reach without extra staff costs.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Basic (no AI)<small>Commands, menus, predefined answers, 1 year of hosting</small></span>
+              <span class="pricing-tier-price">$50-100 <small>+ 24/7 support </small></span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Pro (with AI)<small>Smart answers, NLP, DB/CRM integration, conversational flows</small></span>
+              <span class="pricing-tier-price">$110-250 <small>+ $15-25/month</small></span>
+            </div>
+          </div>
+          <div class="pricing-amount">From $50</div>
+          <div class="pricing-label">one-time setup · demo available</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Card 3: Automation ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+          <div class="pricing-name">Process Automation</div>
+          <div class="pricing-desc">Zapier/n8n workflows and custom scripts (Python/Node) that remove manual tasks. Saves 10-20 hours a week from the first month.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Basic<small>1-2 simple workflows + documentation</small></span>
+              <span class="pricing-tier-price">$70-110</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Medium<small>3-5 workflows + AI + 3 months of support</small></span>
+              <span class="pricing-tier-price">$160-250</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Advanced<small>Complex workflows with databases/custom AI + training</small></span>
+              <span class="pricing-tier-price">$300-480</span>
+            </div>
+          </div>
+          <div class="pricing-amount">From $70</div>
+          <div class="pricing-label">free 30-min audit</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Card 4: Websites ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="pricing-name">Website Creation</div>
+          <div class="pricing-desc">From landing pages to complete e-commerce. A professional, responsive online presence optimized for mobile. Ready in 7-14 days.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Landing Page<small>1 page, SEO, brand identity, form, WhatsApp/Telegram/Gmail, hosting + domain for 1 year</small></span>
+              <span class="pricing-tier-price">$130</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Online Catalog<small>Landing page, product details, filters, admin panel, contact, hosting + domain for 1 year</small></span>
+              <span class="pricing-tier-price">$350</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">E-commerce<small>Catalog, shopping cart, payment gateway, inventory management, smart dashboard, reports, notifications, built-in AI</small></span>
+              <span class="pricing-tier-price">$1,300</span>
+            </div>
+          </div>
+          <div class="pricing-amount">From $130</div>
+          <div class="pricing-label">hosting + domain for 1 year included</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Card 5: AI Training ── -->
+        <div class="pricing-card pricing-card--alt">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z"/></svg>
+          </div>
+          <div class="pricing-name">AI Training</div>
+          <div class="pricing-desc">Learn to write effective prompts, automate daily tasks and apply AI tools in your business or profession. Practical training in small groups.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Free Intro Workshop<span class="pricing-tier-badge">Free</span><small>1h group class • Effective prompts • Daily tips • Downloadable PDF with 50 prompts</small></span>
+              <span class="pricing-tier-price">Free</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Individual Session<small>2h of advanced AI training • Exclusive material • Small groups</small></span>
+              <span class="pricing-tier-price">$60</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">1-on-1 Consulting<small>Personalized AI strategy for your business • Premium tools • Follow-up</small></span>
+              <span class="pricing-tier-price">$90</span>
+            </div>
+          </div>
+          <div class="pricing-amount">From $60</div>
+          <div class="pricing-label">first workshop free · small groups</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Card 6: AI Chatbots ── -->
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+          </div>
+          <div class="pricing-name">AI Chatbots for Websites</div>
+          <div class="pricing-desc">Smart widget trained with your business data (FAQ, products, policies). Answers 24/7, hands off to humans and generates analytics.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Basic Setup<small>Rules + simple AI, website integration</small></span>
+              <span class="pricing-tier-price">$150 <small>+ $20-25/month</small></span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Advanced<small>Full context, CRM integration, analytics</small></span>
+              <span class="pricing-tier-price">$300<small>+ $20-35/month</small></span>
+            </div>
+          </div>
+          <div class="pricing-amount">From $150</div>
+          <div class="pricing-label">interactive demo available</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Custom Apps ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+          </div>
+          <div class="pricing-name">Custom Apps</div>
+          <div class="pricing-desc">We build the app or website you need to solve a specific problem or bring your own project to life, whether you run a business or have a personal idea.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">For businesses<small>An app designed around how your business works</small></span>
+              <span class="pricing-tier-price">Ask us</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">For individuals<small>Your idea or personal project, made real</small></span>
+              <span class="pricing-tier-price">Ask us</span>
+            </div>
+          </div>
+          <div class="pricing-amount">Get a quote</div>
+          <div class="pricing-label">priced by project</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Business Systems ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01"/></svg>
+          </div>
+          <div class="pricing-name">Business Systems</div>
+          <div class="pricing-desc">Inventory, orders, bookings and customers in one place, with less paperwork and less repetitive work.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Inventory and orders<small>Keep track of stock and orders</small></span>
+              <span class="pricing-tier-price">Ask us</span>
+            </div>
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Bookings and customers<small>Your calendar and customer data, organized</small></span>
+              <span class="pricing-tier-price">Ask us</span>
+            </div>
+          </div>
+          <div class="pricing-amount">Get a quote</div>
+          <div class="pricing-label">priced by business</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── First Version of Your Idea ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 00-4 12.7V16h8v-1.3A7 7 0 0012 2z"/></svg>
+          </div>
+          <div class="pricing-name">First Version of Your Idea</div>
+          <div class="pricing-desc">A simple version of your app to test with real people before investing heavily.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Initial version<small>We define the essentials together and build them</small></span>
+              <span class="pricing-tier-price">Ask us</span>
+            </div>
+          </div>
+          <div class="pricing-amount">Get a quote</div>
+          <div class="pricing-label">start small, grow later</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+        <!-- ── Monthly Maintenance ── -->
+        <div class="pricing-card">
+          <div class="pricing-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg>
+          </div>
+          <div class="pricing-name">Monthly Maintenance</div>
+          <div class="pricing-desc">Updates and support to keep your website or app running well after delivery.</div>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="pricing-tier-name">Monthly fee<small>Updates, check-ups and support</small></span>
+              <span class="pricing-tier-price">Ask us</span>
+            </div>
+          </div>
+          <div class="pricing-amount">Get a quote</div>
+          <div class="pricing-label">based on app size</div>
+          <a href="contact.html" class="pricing-btn">Request →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2026 <span>Kynari</span> - Cybersecurity Engineering. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  /* ─── Mobile nav toggle ─── */
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  const backdrop = document.querySelector('.nav-backdrop');
+
+  function openNav() {
+    links.classList.add('open');
+    toggle.classList.add('active');
+    toggle.setAttribute('aria-expanded', 'true');
+    backdrop.classList.add('visible');
+  }
+  function closeNav() {
+    links.classList.remove('open');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+    backdrop.classList.remove('visible');
+  }
+
+  toggle.addEventListener('click', () => {
+    links.classList.contains('open') ? closeNav() : openNav();
+  });
+  backdrop.addEventListener('click', closeNav);
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('open')) closeNav();
+  });
+
+  /* ─── Scroll Reveal ─── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.stagger-children').forEach((el) => {
+    revealObserver.observe(el);
+  });
+</script>
+</body>
+</html>

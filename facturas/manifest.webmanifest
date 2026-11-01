@@ -1,7 +1,7 @@
 {
   "name": "MBM Invoice",
   "short_name": "MBM Invoice",
-  "description": "Crea facturas gratis desde tu móvil. Sin cuentas: tus datos se quedan en tu dispositivo.",
+  "description": "Crea facturas gratis desde tu móvil. Tus facturas se quedan en tu dispositivo.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",

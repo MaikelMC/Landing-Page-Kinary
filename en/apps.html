@@ -719,6 +719,11 @@
   .project-card .project-tags { margin-top: auto; justify-content: space-between; }
   .project-card .project-tags .project-status,
   .project-card .project-tags .project-link { margin-top: 0; }
+  .project-stats {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
   .apps-cta {
     margin-top: var(--space-16);
     text-align: center;
@@ -763,6 +768,26 @@
           "image": "https://kynari.dev/apps/la-verde.png",
           "applicationCategory": "WebApplication",
           "operatingSystem": "Web",
+          "publisher": {
+            "@type": "ProfessionalService",
+            "name": "Kynari",
+            "url": "https://kynari.dev/"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "MBM Invoice",
+          "description": "Create invoices from your phone, free and with no account. Your data stays on your device and it works offline.",
+          "url": "https://mbtzm.github.io/mbm-invoice/",
+          "image": "https://kynari.dev/apps/mbm-invoice.png",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0" },
+          "author": { "@type": "Person", "name": "Mauricio Benitez" },
           "publisher": {
             "@type": "ProfessionalService",
             "name": "Kynari",
@@ -833,6 +858,21 @@
             </div>
           </div>
         </div>
+        <div class="project-card" data-stat-app="mbm-invoice">
+          <div class="project-image">
+            <img src="../apps/mbm-invoice.png" alt="MBM Invoice" loading="lazy">
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Invoices · Installable app</span>
+            <h2 class="project-title">MBM Invoice</h2>
+            <p class="project-desc">Create invoices from your phone, free and with no account. Your data stays on your device, it works offline and installs without an app store. Created by Mauricio Benitez.</p>
+            <p class="project-stats" hidden></p>
+            <div class="project-tags">
+              <span class="project-status">✓ Free</span>
+              <a href="https://mbtzm.github.io/mbm-invoice/" target="_blank" rel="noopener" class="project-link">Open →</a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="apps-cta">
         <p>Do you have an idea for your own app?</p>
@@ -875,6 +915,45 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && links.classList.contains('open')) closeNav();
   });
+
+  /* ─── Estadísticas de apps ───
+     Apagado mientras STATS_SITE esté vacío: entonces no se carga ni se envía nada.
+     Se muestran solo números reales, a partir de STATS_MIN. */
+  const STATS_SITE = '';
+  const STATS_MIN = 25;
+  if (STATS_SITE) {
+    const statsBase = `https://${STATS_SITE}.goatcounter.com`;
+    const statsHit = (p) => { new Image().src = `${statsBase}/count?p=${encodeURIComponent(p)}`; };
+    const statsRead = (p) => fetch(`${statsBase}/counter/${encodeURIComponent(p)}.json`)
+      .then(r => r.ok ? r.json() : { count: '0' })
+      .then(d => d.count)
+      .catch(() => null);
+    document.querySelectorAll('[data-stat-app]').forEach((card) => {
+      const viewPath = `/apps/${card.dataset.statApp}/vista`;
+      const openPath = `/apps/${card.dataset.statApp}/abrir`;
+      const seen = new IntersectionObserver((entries) => {
+        if (!entries.some(e => e.isIntersecting)) return;
+        seen.disconnect();
+        try {
+          if (sessionStorage.getItem(viewPath)) return;
+          sessionStorage.setItem(viewPath, '1');
+        } catch (_) {}
+        statsHit(viewPath);
+      }, { threshold: 0.5 });
+      seen.observe(card);
+      card.querySelector('.project-link').addEventListener('click', () => statsHit(openPath));
+      Promise.all([statsRead(viewPath), statsRead(openPath)]).then(([views, opens]) => {
+        const number = (v) => Number(String(v).replace(/[^0-9]/g, ''));
+        const parts = [];
+        if (views !== null && number(views) >= STATS_MIN) parts.push(`${views} views`);
+        if (opens !== null && number(opens) >= STATS_MIN) parts.push(`${opens} opens`);
+        if (!parts.length) return;
+        const line = card.querySelector('.project-stats');
+        line.textContent = parts.join(' · ');
+        line.hidden = false;
+      });
+    });
+  }
 
   /* ─── Scroll Reveal ─── */
   const revealObserver = new IntersectionObserver((entries) => {

@@ -690,18 +690,8 @@
   /* ─── Equipo ─── */
   .about-text h3.team-role { margin-top: calc(var(--space-3) * -1); margin-bottom: var(--space-5); }
   .team-member { padding-bottom: var(--space-24); }
-  .team-initials {
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--accent);
-    background: var(--accent-glow);
-    border: 1px solid var(--accent);
-  }
+  .team-frame { aspect-ratio: 1 / 1; }
+  .team-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
 </style>
 <script type="application/ld+json">
 {
@@ -750,6 +740,7 @@
         "@id": "https://kynari.dev/sobre-mi.html#mauricio-benitez",
         "name": "Mauricio Benitez",
         "jobTitle": "Cofundador",
+        "image": "https://kynari.dev/mauricio-benitez.jpg",
         "description": "Cofundador de Kynari. Lidera Kynari Empleos y combina visión de negocio, marketing, administración y tecnología, con automatizaciones y soluciones web apoyadas en inteligencia artificial.",
         "url": "https://kynari.dev/sobre-mi.html#mauricio-benitez",
         "worksFor": {
@@ -855,7 +846,9 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-visual reveal-left">
-          <div class="team-initials" aria-hidden="true">MB</div>
+          <div class="about-frame team-frame">
+            <img class="team-photo" src="mauricio-benitez.jpg" alt="Mauricio Benitez, cofundador de Kynari" width="800" height="800" loading="lazy">
+          </div>
           <div class="about-tags">
             <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><ellipse cx="7" cy="7" rx="6.5" ry="4.5" fill="#777BB4"/><text x="7" y="9" text-anchor="middle" fill="#fff" font-size="4.6" font-weight="700">php</text></svg>PHP</span>
             <span class="about-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="2" fill="#306998"/><rect x="1" y="3" width="12" height="5" rx="1" fill="#FFD43B"/><path d="M4 6h6M7 4v5" stroke="#306998" stroke-width=".8"/></svg>Python</span>

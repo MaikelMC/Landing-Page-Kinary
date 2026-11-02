@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kynari - Cybersecurity & Secure Development</title>
-<meta name="description" content="Kynari provides secure software development, professional cybersecurity, custom apps and process automation for businesses and individuals.">
+<meta name="description" content="Kynari provides secure software development, professional cybersecurity and process automation for businesses and individual clients.">
 <meta property="og:title" content="Kynari — Cybersecurity & Secure Development">
 <meta property="og:description" content="Complete protection for your business: secure development, cybersecurity, automation and AI training.">
 <meta property="og:type" content="website">
@@ -947,7 +947,7 @@
   "url": "https://kynari.dev/en/",
   "logo": "https://kynari.dev/kynari-logo.png",
   "image": "https://kynari.dev/kynari-logo.png",
-  "description": "Kynari provides secure software development, professional cybersecurity, custom apps and process automation for businesses and individuals.",
+  "description": "Kynari provides secure software development, professional cybersecurity and process automation for businesses and individual clients.",
   "email": "kynaridevai@gmail.com",
   "telephone": "+53 55336238",
   "priceRange": "$$",
@@ -955,17 +955,18 @@
     "@type": "PostalAddress",
     "addressCountry": "CU"
   },
+  "areaServed": "CU",
   "founder": [
     {
       "@type": "Person",
       "name": "Maikel de Arma",
-      "jobTitle": "Founder and CEO"
+      "jobTitle": "Cybersecurity Engineer"
     },
     {
       "@type": "Person",
       "name": "Mauricio Benitez",
       "jobTitle": "Co-founder",
-      "url": "https://kynari.dev/en/#team"
+      "url": "https://kynari.dev/en/team.html#mauricio-benitez"
     }
   ],
   "sameAs": [
@@ -984,7 +985,10 @@
       <div class="nav-links">
         <a href="services.html">Services</a>
         <a href="apps.html">Apps</a>
-        <a href="index.html#team">Team</a>
+        <a href="projects.html">Projects</a>
+        <a href="team.html">Team</a>
+        <a href="news.html">News</a>
+        <a href="faq.html">FAQ</a>
         <a href="contact.html" class="nav-cta">Contact</a>
         <a href="../index.html" class="nav-lang" lang="es" hreflang="es" aria-label="Versión en español">ES</a>
       </div>
@@ -1169,22 +1173,14 @@
     </div>
   </section>
 
-  <section id="team" data-od-id="team">
+  <section id="news" data-od-id="noticias">
     <div class="container">
       <div class="services-header">
-        <div class="section-label reveal">Team</div>
-        <h2 class="section-title reveal reveal-delay-1">The people behind Kynari</h2>
+        <div class="section-label reveal">News</div>
+        <h2 class="section-title reveal reveal-delay-1">Latest updates</h2>
+        <p class="section-desc reveal reveal-delay-2">Analysis, alerts and perspectives from the world of cybersecurity and secure development.</p>
       </div>
-      <div class="services-grid stagger-children">
-        <div class="service-card">
-          <div class="service-title">Maikel de Arma</div>
-          <div class="service-desc">Founder and CEO. Cybersecurity engineer who helps businesses and professionals protect their systems and use AI as a strategic ally.</div>
-        </div>
-        <div class="service-card">
-          <div class="service-title">Mauricio Benitez</div>
-          <div class="service-desc">Co-founder. Turns ideas into digital products that solve real problems. Leads Kynari Empleos, the job platform for Cuba, combining business vision, marketing, administration and technology, and develops automations and web solutions with the support of AI.</div>
-        </div>
-      </div>
+      <div id="news-grid" class="news-grid stagger-children"></div>
     </div>
   </section>
 
@@ -1290,6 +1286,79 @@
       });
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
+  })();
+
+  /* ─── News / Blog ─── */
+  (function() {
+    /* ── EDIT HERE: add or remove news items in the array ── */
+    const noticias = [
+      {
+        id: 1,
+        tag: "Artificial Intelligence",
+        titulo: "Free AI in 2026: Muse Image, DeepSeek V4, MiniMax M2.1 and Grok API credits",
+        fecha: "Jul 2026",
+        excerpt: "Meta launches Muse Image, DeepSeek V4 and MiniMax M2.1 compete with closed models, and Grok API offers free credits for developers."
+      },
+      {
+        id: 2,
+        tag: "Cybersecurity",
+        titulo: "An 89% increase in AI-driven attacks: the 2026 landscape",
+        fecha: "2026",
+        excerpt: "CrowdStrike and ESET reports reveal 89% more AI attacks, spread in 29 minutes and a focus on supply chain and cloud."
+      },
+      {
+        id: 3,
+        tag: "Open Source",
+        titulo: "Open source cybersecurity and productivity tools for 2026",
+        fecha: "2026",
+        excerpt: "Allama, Pompelmi, OpenSSF, SiliconFlow, Hugging Face, Falcon AI, Stable LM and OpenChat: the open source ecosystem transforming security."
+      },
+      {
+        id: 4,
+        tag: "Automation",
+        titulo: "n8n 2026: new AI Agent nodes, multi-model support and Canvas UI",
+        fecha: "Jul 2026",
+        excerpt: "n8n adds AI Agent nodes with support for Claude, Grok and Gemini, a new Canvas UI and improvements in security and error handling."
+      },
+      {
+        id: 5,
+        tag: "Automation",
+        titulo: "Telegram AI Bots Revolution: 11 new features for bots",
+        fecha: "Jun 2026",
+        excerpt: "Guest Bots, bot-to-bot communication, chat automations and rich text. The most important updates for Telegram bots."
+      }
+    ];
+
+    const grid = document.getElementById('news-grid');
+    if (!grid) return;
+
+    noticias.forEach((n, i) => {
+      const card = document.createElement('article');
+      card.className = 'news-card reveal';
+      if (i > 0) card.classList.add('reveal-delay-' + Math.min(i, 4));
+
+      card.innerHTML = `
+        <div class="news-meta">
+          <span class="news-tag">${n.tag}</span>
+          <span class="news-date">${n.fecha}</span>
+        </div>
+        <h3 class="news-title">${n.titulo}</h3>
+        <p class="news-excerpt">${n.excerpt}</p>
+        <a href="news.html#noticia-${n.id}" class="news-link">Read more <span>&rarr;</span></a>
+      `;
+      grid.appendChild(card);
+    });
+
+    const newsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          newsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    grid.querySelectorAll('.news-card').forEach(card => newsObserver.observe(card));
   })();
 
 

@@ -1,0 +1,106 @@
+/* Vídeo animado de la Oficina Kynari (apps/oficina-demo.js). Usa los colores de la web (--bg, --accent…). */
+.demo { margin-top: var(--space-10); }
+.demo-stage {
+  position: relative; aspect-ratio: 16 / 9; width: 100%;
+  border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: hidden;
+  background: radial-gradient(120% 90% at 85% 0%, rgba(212,175,55,0.10), transparent 55%), #0b0b0b;
+  container-type: inline-size;
+  --u: 1cqw;
+}
+.demo-win {
+  position: absolute; inset: 5% 4% 8% 4%; border-radius: calc(1.6 * var(--u)); background: #121212;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 calc(2 * var(--u)) calc(6 * var(--u)) rgba(0,0,0,0.5); overflow: hidden;
+}
+.demo-bar { height: 6%; display: flex; align-items: center; gap: calc(0.7 * var(--u)); padding: 0 calc(1.4 * var(--u)); background: #181818; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.demo-bar i { width: calc(0.9 * var(--u)); height: calc(0.9 * var(--u)); border-radius: 50%; background: #333; }
+.demo-bar span { margin-left: calc(1 * var(--u)); font: 500 calc(1.1 * var(--u)) var(--font-mono); color: var(--muted); }
+.demo-scene { position: absolute; inset: 6% 0 0 0; padding: calc(3 * var(--u)) calc(4 * var(--u)); opacity: 0; visibility: hidden; transition: opacity .5s, visibility .5s; color: var(--fg); font-family: var(--font-body); font-size: calc(1.6 * var(--u)); }
+.demo-scene.on { opacity: 1; visibility: visible; }
+.demo-scene h3 { font: 600 calc(2.6 * var(--u))/1.15 var(--font-display); letter-spacing: -0.01em; margin-bottom: calc(2 * var(--u)); }
+.demo-scene h3 em { font-style: normal; color: var(--accent); }
+
+/* Piezas que van apareciendo: cada una lleva su retraso en --d */
+.demo-scene .pop { opacity: 0; transform: translateY(calc(1.2 * var(--u))); }
+.demo-scene.on .pop { animation: demoPop .6s var(--ease-out-expo) forwards; animation-delay: var(--d, 0s); }
+@keyframes demoPop { to { opacity: 1; transform: none; } }
+
+.d-card { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.08); border-radius: calc(1.2 * var(--u)); padding: calc(1.6 * var(--u)) calc(2 * var(--u)); }
+.d-row { display: flex; align-items: center; gap: calc(1.2 * var(--u)); }
+.d-col { display: grid; gap: calc(1.2 * var(--u)); }
+.d-two { display: grid; grid-template-columns: 1fr 1fr; gap: calc(2.4 * var(--u)); align-items: start; }
+.d-chip { display: inline-flex; align-items: center; gap: .5cqw; padding: .4cqw calc(1.1 * var(--u)); border-radius: 99px; font-size: calc(1.25 * var(--u)); font-weight: 600; border: 1px solid rgba(255,255,255,0.12); color: var(--fg-2); }
+.d-chip.gold { background: var(--accent-glow-strong); border-color: var(--accent); color: var(--accent); }
+.d-chip.ok { background: rgba(57,168,82,0.15); border-color: #39a852; color: #6fd08a; }
+.d-chip.bad { background: rgba(214,69,69,0.15); border-color: #d64545; color: #f08a8a; }
+.d-chip.purple { background: rgba(160,120,230,0.15); border-color: #a078e6; color: #c9b0f5; }
+.d-avatar { width: calc(3 * var(--u)); height: calc(3 * var(--u)); border-radius: 50%; display: grid; place-items: center; font: 700 calc(1.2 * var(--u)) var(--font-display); background: var(--accent-glow-strong); color: var(--accent); flex: none; }
+.d-muted { color: var(--muted); }
+.d-mono { font-family: var(--font-mono); }
+.d-file { display: flex; align-items: center; gap: calc(1 * var(--u)); }
+.d-file b { font-weight: 600; }
+.d-file svg { width: calc(2.4 * var(--u)); height: calc(2.4 * var(--u)); flex: none; color: var(--accent); }
+
+/* Carpetas */
+.d-tree { display: grid; gap: .5cqw; font-size: calc(1.45 * var(--u)); }
+.d-tree div { display: flex; justify-content: space-between; padding: .5cqw calc(1 * var(--u)); border-radius: .6cqw; }
+.d-tree .sub { margin-left: calc(2 * var(--u)); }
+.d-tree .hot { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
+.d-tree .n { font-family: var(--font-mono); color: var(--muted); }
+.demo-scene.on .d-fly { animation: demoFly 1.4s var(--ease-out-expo) forwards; animation-delay: var(--d, 0s); opacity: 0; }
+@keyframes demoFly { 0% { opacity: 0; transform: translate(calc(14 * var(--u)), calc(-6 * var(--u))) scale(1.1); } 30% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+
+/* Resumen */
+.d-table { width: 100%; border-collapse: collapse; font-size: calc(1.5 * var(--u)); font-variant-numeric: tabular-nums; }
+.d-table td { padding: .7cqw 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.d-table td:last-child { text-align: right; font-family: var(--font-mono); }
+.d-table tr.total td { border: 0; font-weight: 700; color: var(--accent); }
+.d-meter { height: calc(1.2 * var(--u)); border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; margin: calc(1.4 * var(--u)) 0 .8cqw; }
+.d-meter span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #39a852, #6fd08a); border-radius: 99px; }
+.demo-scene.on .d-meter span { animation: demoFill 2s var(--ease-out-quart) forwards; animation-delay: var(--d, 0s); }
+@keyframes demoFill { to { width: var(--w); } }
+
+/* Chat */
+.d-msg { max-width: 75%; padding: calc(1.1 * var(--u)) calc(1.6 * var(--u)); border-radius: calc(1.4 * var(--u)); font-size: calc(1.55 * var(--u)); line-height: 1.4; }
+.d-msg.me { justify-self: end; background: var(--accent); color: #111; border-bottom-right-radius: .4cqw; }
+.d-msg.ai { justify-self: start; background: #1f1f1f; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: .4cqw; }
+.d-dots { display: inline-flex; gap: .5cqw; }
+.d-dots i { width: .8cqw; height: .8cqw; border-radius: 50%; background: var(--muted); animation: demoDot 1s infinite; }
+.d-dots i:nth-child(2) { animation-delay: .15s; } .d-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes demoDot { 50% { opacity: .2; } }
+.demo-scene.on .d-typing { animation: demoGone .3s forwards; animation-delay: var(--d, 0s); }
+@keyframes demoGone { to { opacity: 0; height: 0; padding: 0; margin: 0; border: 0; } }
+
+/* Final */
+.d-cta { text-align: center; display: grid; place-items: center; height: 100%; align-content: center; gap: calc(2 * var(--u)); }
+.d-cta h3 { font-size: calc(3.6 * var(--u)); margin: 0; }
+.d-steps { display: flex; gap: calc(2 * var(--u)); justify-content: center; }
+.d-steps div { width: calc(18 * var(--u)); text-align: left; }
+.d-steps b { display: block; font: 700 calc(2.4 * var(--u)) var(--font-display); color: var(--accent); }
+
+/* Subtítulo y controles */
+.demo-caption { min-height: 3.2em; margin-top: var(--space-4); font-size: var(--text-base); color: var(--fg-2); line-height: 1.5; text-align: center; }
+.demo-controls { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-3); }
+.demo-play { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--accent); background: var(--accent-glow); color: var(--accent); display: grid; place-items: center; cursor: pointer; flex: none; }
+.demo-play svg { width: 16px; height: 16px; }
+.demo-play:focus-visible, .demo-seg:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.demo-segs { flex: 1; display: flex; gap: 6px; }
+.demo-seg { flex: 1; height: 6px; padding: 0; border: 0; border-radius: 99px; background: rgba(255,255,255,0.1); overflow: hidden; cursor: pointer; position: relative; }
+.demo-seg span { position: absolute; inset: 0; width: 0; background: var(--accent); }
+.demo-note { margin-top: var(--space-2); font-size: var(--text-xs); color: var(--muted); text-align: center; }
+
+@media (max-width: 600px) {
+  /* En el móvil el vídeo es vertical, con letra el doble de grande y una sola columna. */
+  .demo-stage { aspect-ratio: 9 / 15; --u: 2cqw; }
+  .demo-win { inset: 2% 2% 2% 2%; }
+  .demo-scene { padding: calc(2 * var(--u)) calc(2.4 * var(--u)); }
+  .d-two { grid-template-columns: 1fr; gap: calc(1.4 * var(--u)); }
+  .d-steps { flex-direction: column; align-items: center; }
+  .d-steps div { width: auto; max-width: 80%; }
+  .d-msg { max-width: 92%; }
+  .demo-scene .d-solo-pc { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-scene .pop, .demo-scene .d-fly { opacity: 1; transform: none; animation: none !important; }
+  .demo-scene.on .d-meter span { animation: none; width: var(--w); }
+  .demo-scene .d-typing { display: none; }
+}

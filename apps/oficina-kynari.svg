@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Oficina Kynari">
+  <defs>
+    <radialGradient id="luz" cx="85%" cy="0%" r="90%">
+      <stop offset="0" stop-color="#d4af37" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="barra" x1="0" x2="1">
+      <stop offset="0" stop-color="#39a852"/><stop offset="1" stop-color="#6fd08a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#0b0b0b"/>
+  <rect width="1600" height="900" fill="url(#luz)"/>
+  <!-- ventana -->
+  <rect x="120" y="110" width="1360" height="700" rx="28" fill="#121212" stroke="#2a2a2a" stroke-width="2"/>
+  <rect x="120" y="110" width="1360" height="56" rx="28" fill="#181818"/>
+  <rect x="120" y="140" width="1360" height="26" fill="#181818"/>
+  <circle cx="160" cy="138" r="9" fill="#333"/><circle cx="190" cy="138" r="9" fill="#333"/><circle cx="220" cy="138" r="9" fill="#333"/>
+  <!-- carpetas -->
+  <g font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" fill="#c8c0b0">
+    <rect x="170" y="210" width="400" height="550" rx="20" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <text x="205" y="270" fill="#f0ece4" font-weight="600">Facturas</text><text x="530" y="270" text-anchor="end" fill="#8a8070">14</text>
+    <text x="235" y="325">Octubre 2026</text><text x="530" y="325" text-anchor="end" fill="#8a8070">9</text>
+    <rect x="200" y="350" width="345" height="56" rx="12" fill="#d4af37" fill-opacity=".18"/>
+    <text x="235" y="388" fill="#d4af37" font-weight="600">Noviembre 2026</text><text x="530" y="388" text-anchor="end" fill="#d4af37">5</text>
+    <text x="205" y="455">Ingresos</text><text x="205" y="515">Contratos</text><text x="205" y="575">Legal</text><text x="205" y="635">Planes</text>
+    <text x="205" y="715" font-size="24" fill="#8a8070">🔒 Solo nosotros · Privado · Normal</text>
+  </g>
+  <!-- resumen -->
+  <g font-family="Inter, Helvetica, Arial, sans-serif" font-size="30">
+    <rect x="610" y="210" width="820" height="300" rx="20" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <text x="650" y="270" fill="#f0ece4" font-weight="600" font-size="34">Resumen de noviembre</text>
+    <g font-family="JetBrains Mono, Consolas, monospace" fill="#c8c0b0" font-size="28">
+      <text x="650" y="330">USD</text><text x="1390" y="330" text-anchor="end">120,00 USD</text>
+      <text x="650" y="380">CAD</text><text x="1390" y="380" text-anchor="end">35,00 CAD</text>
+      <text x="650" y="430">CUP</text><text x="1390" y="430" text-anchor="end">18.500 CUP</text>
+    </g>
+    <rect x="650" y="460" width="740" height="16" rx="8" fill="#2a2a2a"/>
+    <rect x="650" y="460" width="474" height="16" rx="8" fill="url(#barra)"/>
+  </g>
+  <!-- chat -->
+  <g font-family="Inter, Helvetica, Arial, sans-serif" font-size="28">
+    <rect x="890" y="550" width="540" height="70" rx="35" fill="#d4af37"/>
+    <text x="925" y="595" fill="#111">¿Cuánto gastamos en luz?</text>
+    <rect x="610" y="640" width="700" height="110" rx="30" fill="#1f1f1f" stroke="#2a2a2a"/>
+    <text x="645" y="690" fill="#f0ece4">9 facturas este año: 11.300 CUP.</text>
+    <text x="645" y="730" fill="#8a8070" font-size="24">La más alta fue la de agosto.</text>
+  </g>
+  <text x="1480" y="80" text-anchor="end" font-family="Inter Tight, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#f0ece4">Oficina Kynari<tspan fill="#d4af37">.</tspan></text>
+</svg>
